@@ -9,6 +9,12 @@
     <%= f.select :type, options_for_select(%w[Student Teacher]) %>
   </div>
 
+ <div class="field">
+    <%= f.label :Teacher_email%><br />
+    <%= f.text_field :teacher_email, autofocus: true %>
+  </div>
+
+
   <div class="field">
     <%= f.label :First_name %><br />
     <%= f.text_field :first_name, autofocus: true %>
