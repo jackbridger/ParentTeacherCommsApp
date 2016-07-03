@@ -5,12 +5,12 @@
 
 
  <div class="field">
-    <%= f.label :Type %><br />
+    <%= f.label :Student_or_Teacher %><br />
     <%= f.select :type, options_for_select(%w[Student Teacher]) %>
   </div>
-
+</br>
  <div class="field">
-    <%= f.label :Teacher_email%><br />
+    <%= f.label :Teacher_email%> (students only)<br />
     <%= f.text_field :teacher_email, autofocus: true %>
   </div>
 
