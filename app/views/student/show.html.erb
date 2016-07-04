@@ -2,7 +2,7 @@
   <li>
   <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
   </li>
-        <li>
+      <li>
   <%= link_to('Settings', edit_user_registration_path)  %>
   </li>
 <% else %>
@@ -10,15 +10,10 @@
   <%= link_to('Login', new_user_session_path)  %>
   </li>
 <% end %>
+<h1>student summary </h1>
 
+<h2> <%= @student.first_name %> <%= @student.last_name %> </h2>
 
-<h1> Welcome <%= current_user.first_name %> <%= current_user.last_name %> </h1>
+<h2> <%= @student.email %> </h2>
 
-<h2> Email: <%= current_user.email %> </h2>
-
-
-<% @all_users.each do |student| %>
-    <li>
-        <%= link_to student.first_name, student %>
-    </li>
-<% end %>
+<%= link_to "Back", :back %>
