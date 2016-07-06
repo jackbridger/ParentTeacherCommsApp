@@ -11,10 +11,26 @@
   </li>
 <% end %>
 
-<h1> Welcome <%= current_user.first_name %> <%= current_user.last_name %> </h1>
+<h1> Welcome <%= current_user.first_name %> <%= current_user.last_name %> (Student) </h1>
 
 <% @teacher.each do |user| %>
     <h2>Teacher:
         <%= link_to user.first_name %>
     <h2>
+<% end %>
+
+<h3>List of grades</h3>
+<% @all_grades.each do |grades| %>
+<h4><%= grades.subject %> <%= grades.grade_date %></h4>
+    <li>Feedback: "<%= grades.feedback  %>"
+    </li>
+     <li>Percentage:
+        <%=grades.percentage_score  %>
+    </li>
+         <li>Letter grade:
+        <%=grades.grade_letter%>
+    </li>
+    <li>Grade type:
+        <%=grades.grade_type%>
+    </li>
 <% end %>

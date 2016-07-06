@@ -14,6 +14,31 @@
 
 <h2> <%= @student.first_name %> <%= @student.last_name %> </h2>
 
-<h2> <%= @student.email %> </h2>
+<li> <%= @student.email %> </li>
+<li> student_id <%= @student.id %> </li>
+<li> Teacher_id <%= current_user.id %> </li>
 
+<h2>List of grades</h2>
+<% @all_grades.each do |grades| %>
+<h4><%= grades.subject %> <%= grades.grade_date %></h4>
+    <li>Feedback: "<%= grades.feedback  %>"
+    </li>
+     <li>Percentage:
+        <%=grades.percentage_score  %>
+    </li>
+         <li>Letter grade:
+        <%=grades.grade_letter%>
+    </li>
+    <li>Grade type:
+        <%=grades.grade_type%>
+    </li>
+<% end %>
+
+<br>
+<br>
+
+
+<%= link_to('Create Grade', new_grade_path(:student => @student.id))  %>
+<br>
+<br>
 <%= link_to "Back", :back %>

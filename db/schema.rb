@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703185444) do
+ActiveRecord::Schema.define(version: 20160706104316) do
+
+  create_table "grades", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "teacher_id"
+    t.text     "feedback"
+    t.integer  "percentage_score"
+    t.string   "grade_type"
+    t.string   "grade_letter"
+    t.date     "grade_date"
+    t.string   "subject"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["student_id"], name: "index_grades_on_student_id"
+    t.index ["teacher_id"], name: "index_grades_on_teacher_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

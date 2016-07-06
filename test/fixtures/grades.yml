@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  teacher: one
+  feedback: MyText
+  percentage_score: 1
+  grade_type: MyString
+  grade_letter: MyString
+  grade_date: 2016-07-06
+  subject: MyString
+
+two:
+  student: two
+  teacher: two
+  feedback: MyText
+  percentage_score: 1
+  grade_type: MyString
+  grade_letter: MyString
+  grade_date: 2016-07-06
+  subject: MyString

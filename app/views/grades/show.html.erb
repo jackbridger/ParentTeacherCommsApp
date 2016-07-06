@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @grade.student %>
+</p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @grade.teacher %>
+</p>
+
+<p>
+  <strong>Feedback:</strong>
+  <%= @grade.feedback %>
+</p>
+
+<p>
+  <strong>Percentage score:</strong>
+  <%= @grade.percentage_score %>
+</p>
+
+<p>
+  <strong>Grade type:</strong>
+  <%= @grade.grade_type %>
+</p>
+
+<p>
+  <strong>Grade letter:</strong>
+  <%= @grade.grade_letter %>
+</p>
+
+<p>
+  <strong>Grade date:</strong>
+  <%= @grade.grade_date %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @grade.subject %>
+</p>
+
+<%= link_to 'Edit', edit_grade_path(@grade) %> |
+<%= link_to 'Back', grades_path %>
