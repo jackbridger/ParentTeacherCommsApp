@@ -15,8 +15,11 @@
 <h2> <%= @student.first_name %> <%= @student.last_name %> </h2>
 
 <li> <%= @student.email %> </li>
-<li> student_id <%= @student.id %> </li>
-<li> Teacher_id <%= current_user.id %> </li>
+<br>
+<%= link_to('Create Grade', new_grade_path(:student_id => @student.id))  %>
+<br>
+<%= link_to "Back", teacher_index_path %>
+<br>
 
 <h2>List of grades</h2>
 <% @all_grades.each do |grades| %>
@@ -32,13 +35,15 @@
     <li>Grade type:
         <%=grades.grade_type%>
     </li>
+        <li>Grade id:
+        <%=grades.id%>
+    </li>
+    <%= link_to('Edit', edit_grade_path(:grade_id => grades.id, :student_id => grades.student_id )) %>
+    <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>
 
-<br>
-<br>
 
 
-<%= link_to('Create Grade', new_grade_path(:student => @student.id))  %>
+
 <br>
 <br>
-<%= link_to "Back", :back %>

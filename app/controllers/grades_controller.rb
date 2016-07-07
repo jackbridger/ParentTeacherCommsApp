@@ -15,12 +15,15 @@ class GradesController < ApplicationController
   # GET /grades/new
   def new
     @grade = Grade.new :teacher_id => current_user.id
-    @student =  Student.find(params[:student])
+    @student =  Student.find(params[:student_id])
     @grade.student_id = @student.id
   end
 
   # GET /grades/1/edit
   def edit
+       @student =  Student.find(params[:student_id])
+       @grade = Grade.find(params[:grade_id])
+
   end
 
   # POST /grades
@@ -71,6 +74,10 @@ class GradesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grade_params
+      #user needs to submit some feedback for it to be saved
+      params.require(:grade).require(:feedback)
       params.require(:grade).permit(:student_id, :teacher_id, :feedback, :percentage_score, :grade_type, :grade_letter, :grade_date, :subject)
+
+
     end
 end
