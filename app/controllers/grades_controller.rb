@@ -23,7 +23,6 @@ class GradesController < ApplicationController
   def edit
        @student =  Student.find(params[:student_id])
        @grade = Grade.find(params[:grade_id])
-
   end
 
   # POST /grades
@@ -31,28 +30,24 @@ class GradesController < ApplicationController
   def create
     @grade = Grade.new(grade_params)
 
-    respond_to do |format|
       if @grade.save
-        format.html { redirect_to @grade, notice: 'Grade was successfully created.' }
-        format.json { render :show, status: :created, location: @grade }
+        redirect_to(student_path(:id => @grade.student_id), :notice => "Post was successfully created.")
       else
-        format.html { render :new }
-        format.json { render json: @grade.errors, status: :unprocessable_entity }
+        redirect_to(new_grade_path(:id => grade.id), :notice => "Post was not created.")
       end
-    end
   end
 
   # PATCH/PUT /grades/1
   # PATCH/PUT /grades/1.json
   def update
-    respond_to do |format|
+    p "#{params} <<<<<<<<<<<<<<"
+    @grade = Grade.find(params[:grade_id])
+    p " grade..."
+    p @grade
       if @grade.update(grade_params)
-        format.html { redirect_to @grade, notice: 'Grade was successfully updated.' }
-        format.json { render :show, status: :ok, location: @grade }
+          redirect_to(student_path(:grade_id => @grade.student_id), :notice => "Post was successfully edited.")
       else
-        format.html { render :edit }
-        format.json { render json: @grade.errors, status: :unprocessable_entity }
-      end
+        redirect_to(new_grade_path(:grade_id => grade.id), :notice => "Post was not edited.")
     end
   end
 
@@ -69,7 +64,7 @@ class GradesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_grade
-      @grade = Grade.find(params[:id])
+      @grade = Grade.find(params[:grade_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -38,7 +38,7 @@
         <li>Grade id:
         <%=grades.id%>
     </li>
-    <%= link_to('Edit', edit_grade_path(:grade_id => grades.id, :student_id => grades.student_id )) %>
+    <%= link_to('Edit', edit_grade_path(:grade_id => grades.id, :student_id => grades.student_id )) %> |
     <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>
 
