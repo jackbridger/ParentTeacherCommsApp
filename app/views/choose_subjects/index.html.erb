@@ -1,0 +1,8 @@
+<%= link_to('Create Maths Grade', new_grade_path(:student_id => @student.id))  %>
+
+<p><%= @student.id %> </p>
+
+
+<%= link_to('Create English Grade', new_grade_path(:student_id => @student.id))  %>
+
+<%= link_to 'Back', student_path(:id => @student.id) %>

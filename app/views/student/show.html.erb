@@ -16,7 +16,7 @@
 
 <li> <%= @student.email %> </li>
 <br>
-<%= link_to('Create Grade', new_grade_path(:student_id => @student.id))  %>
+<%= link_to('Create Grade', choose_subjects_path(:student_id => @student.id))  %>
 <br>
 <%= link_to "Back", teacher_index_path %>
 <br>

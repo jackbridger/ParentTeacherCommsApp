@@ -22,13 +22,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :feedback %>
-    <%= f.text_area :feedback %>
-  </div>
-
-  <div class="field">
-    <%= f.label :percentage_score %>
-    <%= f.number_field :percentage_score, min: 0, max: 100 %>
+    <%= f.label :performance_grade %>
+    <%= f.select :grade_letter, options_for_select(%w[Not-started" Working-at Working-towards Greater-depth])%>
   </div>
 
   <div class="field">
@@ -37,20 +32,30 @@
   </div>
 
   <div class="field">
-    <%= f.label :grade_letter %>
-    <%= f.select :grade_letter, options_for_select(%w[Not-started" Working-at Working-towards Greater-depth])%>
-  </div>
-
-  <div class="field">
     <%= f.label :grade_date %>
     <%= f.date_select :grade_date %>
   </div>
 
+  <div class="field">
+    <%= f.label :feedback %>
+    <%= f.text_area :feedback %>
+  </div>
+
+<!--
+  <div class="field">
+    <%= f.label :percentage_score %>
+    <%= f.number_field :percentage_score, min: 0, max: 100 %>
+  </div>
+-->
+
+
+
+
+
 
 
     <div class="field">
-    <%= f.label :subject %>
-    <%= f.select :subject, options_for_select(%w[Art English Maths Science])%>
+    <%= f.hidden_field :subject%>
   </div>
 
   <div class="actions">

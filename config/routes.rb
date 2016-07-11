@@ -8,5 +8,6 @@ post 'signup' => 'devise/registrations#create', :as => :custom_user_registration
 
  resources :teacher
  resources :student
+ resources :choose_subjects
 
 end

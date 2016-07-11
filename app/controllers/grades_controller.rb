@@ -14,7 +14,7 @@ class GradesController < ApplicationController
 
   # GET /grades/new
   def new
-    @grade = Grade.new :teacher_id => current_user.id
+    @grade = Grade.new :teacher_id => current_user.id, :subject => "Maths"
     @student =  Student.find(params[:student_id])
     @grade.student_id = @student.id
   end
