@@ -22,7 +22,8 @@ class EnglishGradesController < ApplicationController
 
   # GET /english_grades/1/edit
   def edit
-
+    @english_grade = EnglishGrade.find(params[:id])
+    @student = Student.find_by_id(@english_grade.student_id)
   end
 
   # POST /english_grades
@@ -52,10 +53,9 @@ redirect_to(student_path(@student), :notice => "Post was successfully created.")
   # DELETE /english_grades/1
   # DELETE /english_grades/1.json
   def destroy
-    @english_grade.destroy
-    respond_to do |format|
-      format.html { redirect_to english_grades_url, notice: 'English grade was successfully destroyed.' }
-      format.json { head :no_content }
+    @student = Student.find_by_id(@english_grade.student_id)
+    if @english_grade.destroy
+      redirect_to(student_path(@student), :notice => "Post was successfully created.")
     end
   end
 

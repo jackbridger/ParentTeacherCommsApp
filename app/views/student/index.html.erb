@@ -31,3 +31,16 @@
         <%=grades.subcategory%>
     </li>
 <% end %>
+
+<h3>List of Maths grades</h3>
+<% @all_maths_grades.each do |grades| %>
+<h4><%= grades.title %> <%= grades.grade_date %></h4>
+    <li>Feedback: "<%= grades.feedback  %>"
+    </li>
+     <li>Performance:
+        <%=grades.performance_grade  %>
+    </li>
+    <li>Grade subcategory:
+        <%=grades.subcategory%>
+    </li>
+<% end %>

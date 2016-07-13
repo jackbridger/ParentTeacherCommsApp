@@ -1,5 +1,6 @@
 class CreateMathsGrades < ActiveRecord::Migration[5.0]
   def change
+    drop_table :maths_grades
     create_table :maths_grades do |t|
       t.references :teacher, foreign_key: true
       t.references :student, foreign_key: true

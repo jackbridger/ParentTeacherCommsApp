@@ -2,5 +2,5 @@
 
 <%= render 'form', english_grade: @english_grade %>
 
-<%= link_to 'Show', @english_grade %> |
-<%= link_to 'Back', english_grades_path %>
+<td><%= link_to 'Delete', @english_grade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<%= link_to 'Back', student_path(:id => @student.id) %>

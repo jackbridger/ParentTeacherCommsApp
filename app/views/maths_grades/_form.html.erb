@@ -12,7 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.hidden_field :teacher_id, :grade_id => 1 %>
+    <%= f.label :teacher_id %>
+    <%= f.text_field :teacher_id %>
   </div>
 
   <div class="field">
@@ -44,7 +45,6 @@
     <%= f.label :grade_date %>
     <%= f.date_select :grade_date %>
   </div>
-
 
   <div class="actions">
     <%= f.submit %>

@@ -37,10 +37,28 @@
         <li>Grade id:
         <%=grades.id%>
     </li>
-    <%= link_to('Edit', edit_english_grade_path(grades)) %> |
+    <%= link_to('Edit', edit_english_grade_path(grades)) %> | <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
 <% end %>
+<h2>List of Maths grades</h2>
 
+<% @all_maths_grades.each do |grades| %>
+<h4><%= grades.title %> <%= grades.grade_date %></h4>
+
+     <li>Grade subcategory:
+        <%=grades.subcategory  %>
+    </li>
+         <li>Performance:
+        <%=grades.performance_grade%>
+    </li>
+        <li>Feedback: "<%= grades.feedback  %>"
+    </li>
+        <li>Grade id:
+        <%=grades.id%>
+    </li>
+    <%= link_to('Edit', edit_maths_grade_path(grades)) %> |
+<td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
 
 <br>
 <br>

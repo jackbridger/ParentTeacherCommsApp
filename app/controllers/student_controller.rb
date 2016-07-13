@@ -3,6 +3,7 @@ class StudentController < ApplicationController
     def index
         @teacher = Teacher.where('email' => current_user.teacher_email)
         @all_english_grades = current_user.english_grades.all
+        @all_maths_grades = current_user.maths_grades.all
     end
 
 #using the incorrect params jst to make it work

@@ -3,4 +3,6 @@
 
 <%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => @teacher.id))  %>
 
+<%= link_to('Create Maths Grade', new_maths_grade_path(:student_id => @student.id, :teacher_id => @teacher.id))  %>
+
 <%= link_to 'Back', student_path(:id => @student.id) %>

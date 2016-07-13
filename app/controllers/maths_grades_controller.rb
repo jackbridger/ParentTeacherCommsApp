@@ -14,54 +14,55 @@ class MathsGradesController < ApplicationController
 
   # GET /maths_grades/new
   def new
-    @maths_grade = MathsGrade.new :teacher_id => current_user.id
-    @student =  Student.find(params[:student_id])
+    @maths_grade = MathsGrade.new
+    @maths_grade.teacher_id = current_user.id
+    @student = Student.find(params[:student_id])
     @maths_grade.student_id = @student.id
   end
 
   # GET /maths_grades/1/edit
   def edit
-        @student =  Student.find(params[:student_id])
-       @maths_grade = MathsGrade.find(params[:grade_id])
+        @maths_grade = MathsGrade.find(params[:id])
+    @student = Student.find_by_id(@maths_grade.student_id)
   end
 
   # POST /maths_grades
   # POST /maths_grades.json
   def create
     @maths_grade = MathsGrade.new(maths_grade_params)
+    @student = Student.find_by_id(@maths_grade.student_id)
+    if @maths_grade.save
+      redirect_to(student_path(@student), :notice => "Post was successfully created.")
+    else
+      redirect_to(student_path(@student), :notice => "Post was successfully created.")
+    end
 
-      if @maths_grade.save
-        redirect_to(student_path(:student_id => @maths_grade.student_id, :grade_id => @maths_grade.id), :notice => "Post was successfully created.")
-      else
-        redirect_to(new_maths_grade_path(:id => @maths_grade.id), :grade_id => @maths_grade.id, :notice => "Post was not created.")
-      end
   end
 
   # PATCH/PUT /maths_grades/1
   # PATCH/PUT /maths_grades/1.json
   def update
-    @maths_grade = MathsGrade.find(params[:grade_id])
+      @student = Student.find_by_id(@maths_grade.student_id)
       if @maths_grade.update(maths_grade_params)
-          redirect_to(student_path(:student_id => @maths_grade.student_id), :notice => "Post was successfully edited.")
+        redirect_to(student_path(@student), :notice => "Post was successfully created.")
       else
-        redirect_to(new_maths_grade_path(:id => @maths_grade.id), :notice => "Post was not edited.")
-    end
+        redirect_to(student_path(@student), :notice => "Post was successfully created.")
+      end
   end
 
   # DELETE /maths_grades/1
   # DELETE /maths_grades/1.json
   def destroy
-    @maths_grade.destroy
-    respond_to do |format|
-      format.html { redirect_to maths_grades_url, notice: 'Maths grade was successfully destroyed.' }
-      format.json { head :no_content }
+    @student = Student.find_by_id(@maths_grade.student_id)
+    if @maths_grade.destroy
+      redirect_to(student_path(@student), :notice => "Post was successfully created.")
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_maths_grade
-      @maths_grade = MathsGrade.find(params[:grade_id])
+      @maths_grade = MathsGrade.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
