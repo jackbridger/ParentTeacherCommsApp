@@ -1,6 +1,20 @@
 class EnglishGradesController < ApplicationController
   before_action :set_english_grade, only: [:show, :edit, :update, :destroy]
 before_filter :authenticate_user!
+before_filter do
+    redirect_to new_user_session_path unless current_teacher || current_student
+end
+
+
+    def current_teacher
+        current_user.type == 'Teacher'
+    end
+
+    def current_student
+        @english_grade = EnglishGrade.find(params[:id])
+        @student = Student.find_by_id(@english_grade.student_id)
+        @student.id == current_user.id
+    end
   # GET /english_grades
   # GET /english_grades.json
   def index

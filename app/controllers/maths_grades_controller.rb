@@ -1,6 +1,20 @@
 class MathsGradesController < ApplicationController
   before_action :set_maths_grade, only: [:show, :edit, :update, :destroy]
 before_filter :authenticate_user!
+before_filter do
+    redirect_to new_user_session_path unless current_teacher
+end
+
+
+    def current_teacher
+        current_user.type == 'Teacher'
+    end
+
+    def current_student
+        @maths_grade = MathsGrade.find(params[:id])
+        @student = Student.find_by_id(@maths_grade.student_id)
+        @student.id == current_user.id
+    end
   # GET /maths_grades
   # GET /maths_grades.json
   def index

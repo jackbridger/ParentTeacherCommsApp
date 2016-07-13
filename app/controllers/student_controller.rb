@@ -1,5 +1,17 @@
 class StudentController < ApplicationController
 before_filter :authenticate_user!
+before_filter do
+    redirect_to new_user_session_path unless current_teacher || params[:id] == nil
+    end
+
+
+    def current_teacher
+        current_user.type == 'Teacher'
+    end
+
+
+
+
     def index
         @teacher = Teacher.where('email' => current_user.teacher_email)
         @all_english_grades = current_user.english_grades.all
@@ -12,5 +24,7 @@ before_filter :authenticate_user!
         @all_maths_grades = @student.maths_grades.all
     @all_english_grades = @student.english_grades.all
     end
+
+
 end
 #where('email' => current_user.teacher_email)
