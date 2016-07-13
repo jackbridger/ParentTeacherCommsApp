@@ -1,5 +1,5 @@
 class TeacherController < ApplicationController
-
+before_filter :authenticate_user!
     def index
         @all_users = Student.where('teacher_email' => current_user.email)
     end

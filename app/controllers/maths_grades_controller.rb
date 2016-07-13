@@ -1,6 +1,6 @@
 class MathsGradesController < ApplicationController
   before_action :set_maths_grade, only: [:show, :edit, :update, :destroy]
-
+before_filter :authenticate_user!
   # GET /maths_grades
   # GET /maths_grades.json
   def index
