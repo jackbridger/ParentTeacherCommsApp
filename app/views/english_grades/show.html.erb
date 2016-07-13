@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @english_grade.teacher %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @english_grade.student %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @english_grade.title %>
+</p>
+
+<p>
+  <strong>Subcategory:</strong>
+  <%= @english_grade.subcategory %>
+</p>
+
+<p>
+  <strong>Performance grade:</strong>
+  <%= @english_grade.performance_grade %>
+</p>
+
+<p>
+  <strong>Feedback:</strong>
+  <%= @english_grade.feedback %>
+</p>
+
+<p>
+  <strong>Grade date:</strong>
+  <%= @english_grade.grade_date %>
+</p>
+
+<%= link_to 'Edit', edit_english_grade_path(@english_grade) %> |
+<%= link_to 'Back', english_grades_path %>

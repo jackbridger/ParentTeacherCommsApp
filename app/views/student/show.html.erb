@@ -16,33 +16,30 @@
 
 <li> <%= @student.email %> </li>
 <br>
-<%= link_to('Create Grade', choose_subjects_path(:student_id => @student.id))  %>
+<%= link_to('Create Grade', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
 <br>
 <%= link_to "Back", teacher_index_path %>
 <br>
 
-<h2>List of grades</h2>
-<% @all_grades.each do |grades| %>
-<h4><%= grades.subject %> <%= grades.grade_date %></h4>
-    <li>Feedback: "<%= grades.feedback  %>"
+<h2>List of English grades</h2>
+
+<% @all_english_grades.each do |grades| %>
+<h4><%= grades.title %> <%= grades.grade_date %></h4>
+
+     <li>Grade subcategory:
+        <%=grades.subcategory  %>
     </li>
-     <li>Percentage:
-        <%=grades.percentage_score  %>
+         <li>Performance:
+        <%=grades.performance_grade%>
     </li>
-         <li>Letter grade:
-        <%=grades.grade_letter%>
-    </li>
-    <li>Grade type:
-        <%=grades.grade_type%>
+        <li>Feedback: "<%= grades.feedback  %>"
     </li>
         <li>Grade id:
         <%=grades.id%>
     </li>
-    <%= link_to('Edit', edit_grade_path(:grade_id => grades.id, :student_id => grades.student_id )) %> |
-    <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%= link_to('Edit', edit_english_grade_path(grades)) %> |
+
 <% end %>
-
-
 
 
 <br>

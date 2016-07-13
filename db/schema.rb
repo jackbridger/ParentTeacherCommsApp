@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706104316) do
+ActiveRecord::Schema.define(version: 20160712162011) do
+
+  create_table "english_grades", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "student_id"
+    t.string   "title"
+    t.string   "subcategory"
+    t.string   "performance_grade"
+    t.string   "feedback"
+    t.date     "grade_date"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["student_id"], name: "index_english_grades_on_student_id"
+    t.index ["teacher_id"], name: "index_english_grades_on_teacher_id"
+  end
 
   create_table "grades", force: :cascade do |t|
     t.integer  "student_id"
@@ -25,6 +39,20 @@ ActiveRecord::Schema.define(version: 20160706104316) do
     t.datetime "updated_at",       null: false
     t.index ["student_id"], name: "index_grades_on_student_id"
     t.index ["teacher_id"], name: "index_grades_on_teacher_id"
+  end
+
+  create_table "maths_grades", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "student_id"
+    t.string   "title"
+    t.string   "subcategory"
+    t.string   "performance_grade"
+    t.string   "feedback"
+    t.date     "grade_date"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["student_id"], name: "index_maths_grades_on_student_id"
+    t.index ["teacher_id"], name: "index_maths_grades_on_teacher_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher: one
+  student: one
+  title: MyString
+  subcategory: MyString
+  performance_grade: MyString
+  feedback: MyString
+  grade_date: 2016-07-12
+
+two:
+  teacher: two
+  student: two
+  title: MyString
+  subcategory: MyString
+  performance_grade: MyString
+  feedback: MyString
+  grade_date: 2016-07-12

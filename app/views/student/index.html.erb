@@ -19,18 +19,15 @@
     <h2>
 <% end %>
 
-<h3>List of grades</h3>
-<% @all_grades.each do |grades| %>
-<h4><%= grades.subject %> <%= grades.grade_date %></h4>
+<h3>List of English grades</h3>
+<% @all_english_grades.each do |grades| %>
+<h4><%= grades.title %> <%= grades.grade_date %></h4>
     <li>Feedback: "<%= grades.feedback  %>"
     </li>
-     <li>Percentage:
-        <%=grades.percentage_score  %>
+     <li>Performance:
+        <%=grades.performance_grade  %>
     </li>
-         <li>Letter grade:
-        <%=grades.grade_letter%>
-    </li>
-    <li>Grade type:
-        <%=grades.grade_type%>
+    <li>Grade subcategory:
+        <%=grades.subcategory%>
     </li>
 <% end %>
