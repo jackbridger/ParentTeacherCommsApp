@@ -30,9 +30,33 @@
 
 <%= link_to('Create feedback generator', choose_feedback_generator_index_path(:teacher_id => @teacher.id))  %>
 
-<h3>English auto feedbacks</h3>
+<h3>English auto feedbacks (current)</h3>
+<h5>Not Started</h5>
+<% if @recent_not_started.blank? %>
+<h5>Create</h5>
+<% else %>
 
-<% @all_generated_feedback.each do |gen_feedback| %>
-      <h5> Performance grade: <%= gen_feedback.performance_grade %> <h5>
-      <p> Feedback: <%= gen_feedback.auto_feedback %> <p>
-<% end %>
+Generated feedback:  "<%= @recent_not_started.auto_feedback %>" </li>
+<br>
+<%= link_to('Edit', edit_generated_feedback_path(@recent_not_started))  %>
+<% end -%>
+
+<h5>Working towards</h5>
+<% if @recent_working_towards.blank? %>
+<%= link_to('Create English Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Working-towards', :subject => 'English'))  %>
+<% else %>
+
+Generated feedback:  "<%= @recent_working_towards.auto_feedback %>" </li>
+
+<% end -%>
+<h5>Working at</h5>
+
+<% unless @recent_working_at.blank? %>
+
+Generated feedback:  "<%= @recent_working_at.auto_feedback %>" </li>
+<% end -%>
+<h5>Greater depth</h5>
+<% unless @recent_greater_depth.blank? %>
+
+Generated feedback:  "<%= @recent_greater_depth.auto_feedback %>" </li>
+<% end -%>

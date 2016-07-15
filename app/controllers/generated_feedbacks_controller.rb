@@ -14,7 +14,7 @@ class GeneratedFeedbacksController < ApplicationController
 
   # GET /generated_feedbacks/new
   def new
-    @generated_feedback = GeneratedFeedback.new
+    @generated_feedback = GeneratedFeedback.new :teacher_id => params[:teacher_id], :performance_grade => params[:performance_grade], :subject => params[:subject]
   end
 
   # GET /generated_feedbacks/1/edit
