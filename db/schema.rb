@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713100728) do
+ActiveRecord::Schema.define(version: 20160714153750) do
 
   create_table "english_grades", force: :cascade do |t|
     t.integer  "teacher_id"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20160713100728) do
     t.datetime "updated_at",        null: false
     t.index ["student_id"], name: "index_english_grades_on_student_id"
     t.index ["teacher_id"], name: "index_english_grades_on_teacher_id"
+  end
+
+  create_table "generated_feedbacks", force: :cascade do |t|
+    t.string   "performance_grade"
+    t.integer  "teacher_id"
+    t.string   "subject"
+    t.text     "auto_feedback"
+    t.string   "subcategory"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["teacher_id"], name: "index_generated_feedbacks_on_teacher_id"
   end
 
   create_table "grades", force: :cascade do |t|

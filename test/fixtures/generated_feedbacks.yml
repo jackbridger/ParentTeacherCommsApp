@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  performance_grade: MyString
+  teacher: one
+  subject: MyString
+  auto_feedback: MyText
+  subcategory: MyString
+
+two:
+  performance_grade: MyString
+  teacher: two
+  subject: MyString
+  auto_feedback: MyText
+  subcategory: MyString

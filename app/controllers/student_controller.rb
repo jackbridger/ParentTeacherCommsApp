@@ -14,8 +14,12 @@ before_filter do
 
     def index
         @teacher = Teacher.where('email' => current_user.teacher_email)
+        #really hacky but so that i can still do .each and with this select a single teacher
+        @teacher_other = Teacher.where('email' => current_user.teacher_email).first
         @all_english_grades = current_user.english_grades.all
         @all_maths_grades = current_user.maths_grades.all
+        @latest_english_grade = current_user.english_grades.last
+        @generated_feedback = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', performance_grade: @latest_english_grade.performance_grade}).first
     end
 
 #using the incorrect params jst to make it work

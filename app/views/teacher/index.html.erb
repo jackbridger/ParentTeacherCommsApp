@@ -25,3 +25,14 @@
         <%= link_to student.first_name, student %>
     </li>
 <% end %>
+
+<h3>Create feedback generator</h3>
+
+<%= link_to('Create feedback generator', choose_feedback_generator_index_path(:teacher_id => @teacher.id))  %>
+
+<h3>English auto feedbacks</h3>
+
+<% @all_generated_feedback.each do |gen_feedback| %>
+      <h5> Performance grade: <%= gen_feedback.performance_grade %> <h5>
+      <p> Feedback: <%= gen_feedback.auto_feedback %> <p>
+<% end %>

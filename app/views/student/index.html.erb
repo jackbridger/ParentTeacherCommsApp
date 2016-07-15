@@ -19,7 +19,9 @@
     <h2>
 <% end %>
 
+
 <h3>List of English grades</h3>
+<h2>Latest English grade: <%= @latest_english_grade.performance_grade %></h2>
 <% @all_english_grades.each do |grades| %>
 <h4><%= grades.title %> <%= grades.grade_date %></h4>
     <li>Feedback: "<%= grades.feedback  %>"
@@ -30,6 +32,12 @@
     <li>Grade subcategory:
         <%=grades.subcategory%>
     </li>
+
+        <% unless @generated_feedback.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback.auto_feedback %> </li>
+        <% end -%>
+
+
 <% end %>
 
 <h3>List of Maths grades</h3>

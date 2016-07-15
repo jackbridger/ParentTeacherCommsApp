@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Performance grade:</strong>
+  <%= @generated_feedback.performance_grade %>
+</p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @generated_feedback.teacher %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @generated_feedback.subject %>
+</p>
+
+<p>
+  <strong>Auto feedback:</strong>
+  <%= @generated_feedback.auto_feedback %>
+</p>
+
+<p>
+  <strong>Subcategory:</strong>
+  <%= @generated_feedback.subcategory %>
+</p>
+
+<%= link_to 'Edit', edit_generated_feedback_path(@generated_feedback) %> |
+<%= link_to 'Back', generated_feedbacks_path %>

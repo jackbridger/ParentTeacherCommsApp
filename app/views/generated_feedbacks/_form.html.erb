@@ -1,0 +1,43 @@
+<%= form_for(generated_feedback) do |f| %>
+  <% if generated_feedback.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(generated_feedback.errors.count, "error") %> prohibited this generated_feedback from being saved:</h2>
+
+      <ul>
+      <% generated_feedback.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :performance_grade %>
+    <%= f.select :performance_grade, options_for_select(%w[Not-started Working-towards Working-at Greater-depth]) %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :teacher_id %>
+    <%= f.text_field :teacher_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subject %>
+    <%= f.text_field :subject %>
+  </div>
+
+  <div class="field">
+    <%= f.label :auto_feedback %>
+    <%= f.text_area :auto_feedback %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subcategory %>
+    <%= f.select :subcategory, options_for_select(%w[Spelling Reading Writing]) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

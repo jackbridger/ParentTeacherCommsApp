@@ -1,0 +1,2 @@
+module GeneratedFeedbacksHelper
+end
