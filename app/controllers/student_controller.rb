@@ -19,7 +19,11 @@ before_filter do
         @all_english_grades = current_user.english_grades.all
         @all_maths_grades = current_user.maths_grades.all
         @latest_english_grade = current_user.english_grades.last
+
         @generated_feedback = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', performance_grade: @latest_english_grade.performance_grade}).first
+
+        #Tasks
+        @all_tasks = Task.where({teacher_id: @teacher_other.id}).all
     end
 
 #using the incorrect params jst to make it work

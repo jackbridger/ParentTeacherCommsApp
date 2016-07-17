@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :tasks
   resources :generated_feedbacks
   resources :maths_grades
   devise_for :users

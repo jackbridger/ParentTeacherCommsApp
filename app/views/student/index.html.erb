@@ -13,42 +13,43 @@
 
 <h1> Welcome <%= current_user.first_name %> <%= current_user.last_name %> (Student) </h1>
 
-<% @teacher.each do |user| %>
-    <h2>Teacher:
-        <%= link_to user.first_name %>
-    <h2>
+
+    <h3>Teacher:
+        <%= @teacher_other.first_name %> <%= @teacher_other.last_name %>
+    <h3>
+
+<h3>Task</h3>
+
+<% @all_tasks.each do |task| %>
+<li>
+    <p><b> <%= task.task %> -  </b><%= task.subject %> - due: <%= task.due_date%> </p>
+</li>
 <% end %>
 
-
 <h3>List of English grades</h3>
-<h2>Latest English grade: <%= @latest_english_grade.performance_grade %></h2>
 <% @all_english_grades.each do |grades| %>
-<h4><%= grades.title %> <%= grades.grade_date %></h4>
-    <li>Feedback: "<%= grades.feedback  %>"
-    </li>
-     <li>Performance:
+<h4><%= grades.title %> (<%=grades.subcategory%>) <%= grades.grade_date %></h4>
+    <li>Performance:
         <%=grades.performance_grade  %>
     </li>
-    <li>Grade subcategory:
-        <%=grades.subcategory%>
+    <li>Feedback: "<%= grades.feedback  %>"
     </li>
+
 
         <% unless @generated_feedback.blank? %>
              <li> Generated feedback:  <%= @generated_feedback.auto_feedback %> </li>
         <% end -%>
-
-
 <% end %>
 
 <h3>List of Maths grades</h3>
 <% @all_maths_grades.each do |grades| %>
-<h4><%= grades.title %> <%= grades.grade_date %></h4>
-    <li>Feedback: "<%= grades.feedback  %>"
-    </li>
-     <li>Performance:
+<h4><%= grades.title %> (<%=grades.subcategory%>) <%= grades.grade_date %></h4>
+    <li>Performance:
         <%=grades.performance_grade  %>
     </li>
-    <li>Grade subcategory:
-        <%=grades.subcategory%>
+    <li>Feedback: "<%= grades.feedback  %>"
     </li>
+   <% unless @generated_feedback.blank? %>
+         <li> Generated feedback:  <%= @generated_feedback.auto_feedback %> </li>
+    <% end %>
 <% end %>
