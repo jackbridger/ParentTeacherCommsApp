@@ -22,6 +22,25 @@ before_filter do
 
         @generated_feedback = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', performance_grade: @latest_english_grade.performance_grade}).first
 
+        #Generated feedback - writing
+        @generated_feedback_writing_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Not-started'}).last
+        @generated_feedback_writing_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Working-towards'}).last
+        @generated_feedback_writing_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Working-at'}).last
+        @generated_feedback_writing_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Greater-depth'}).last
+        #Generated feedback - spelling
+        @generated_feedback_spelling_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Not-started'}).last
+        @generated_feedback_spelling_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Working-towards'}).last
+        @generated_feedback_spelling_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Working-at'}).last
+        @generated_feedback_spelling_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Greater-depth'}).last
+        #Generated feedback - reading
+        @generated_feedback_reading_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Not-started'}).last
+        @generated_feedback_reading_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Working-towards'}).last
+        @generated_feedback_reading_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Working-at'}).last
+        @generated_feedback_reading_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Greater-depth'}).last
+
+
+
+
         #Tasks
         @all_tasks = Task.where({teacher_id: @teacher_other.id}).all
     end
