@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 post 'signup' => 'devise/registrations#create', :as => :custom_user_registration
 
-  root "home#index"
+devise_scope :user do
+  root to: "devise/sessions#new"
+end
 
  resources :teacher
 
@@ -17,4 +19,6 @@ resources :english_grades
 
  resources :choose_subjects
  resources :choose_feedback_generator
+
+ resources :edit_auto_gens
 end

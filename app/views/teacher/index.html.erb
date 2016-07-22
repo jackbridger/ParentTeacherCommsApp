@@ -22,7 +22,7 @@
 <br>
 <% @all_tasks.each do |task| %>
 <li>
-    <p><b> <%= task.task %> -  </b><%= task.subject %> - due: <%= task.due_date%> </p>
+    <p><b> <%= task.task %> -  </b><%= task.subject %> - due: <%= task.due_date%>  <%= link_to('Edit', edit_task_path(task))  %> | <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td> </p>
 </li>
 <% end %>
 
@@ -36,110 +36,4 @@
 <% end %>
 
 
-<!--Where the auto feedbacks begin -->
-
-
-<h3>English auto feedbacks (current)</h3>
-<h4>Spelling:</h4>
-<b>Not Started</b>
-<% if @spelling_recent_not_started.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Not-started', :subject => 'English', :subcategory => 'Spelling'))  %>
-<% else %> "<%= @spelling_recent_not_started.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@spelling_recent_not_started))  %> | <td><%= link_to 'Delete', @spelling_recent_not_started, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-<br>
-
-<b>Working towards:</b>
-<% if @spelling_recent_working_towards.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Working-towards', :subject => 'English', :subcategory => 'Spelling'))  %>
-<% else %> "<%= @spelling_recent_working_towards.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@spelling_recent_working_towards))  %> | <td><%= link_to 'Delete', @spelling_recent_working_towards, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-
-<br>
-
-<b>Working at:</b>
-<% if @spelling_recent_working_at.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Working-at', :subject => 'English', :subcategory => 'Spelling'))  %>
-<% else %> "<%= @spelling_recent_working_at.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@spelling_recent_working_at))  %> | <td><%= link_to 'Delete', @spelling_recent_working_at, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-<br>
-<b>Greater depth:</b>
-<% if @spelling_recent_greater_depth.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Greater-depth', :subject => 'English', :subcategory => 'Spelling'))  %>
-<% else %> "<%= @spelling_recent_greater_depth.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@spelling_recent_greater_depth))  %> | <td><%= link_to 'Delete', @spelling_recent_greater_depth, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-
-
-<!-- Writing -->
-
-
-<h4>Writing:</h4>
-<b>Not Started</b>
-<% if @writing_recent_not_started.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Not-started', :subject => 'English', :subcategory => 'Writing'))  %>
-<% else %> "<%= @writing_recent_not_started.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@writing_recent_not_started))  %> | <td><%= link_to 'Delete', @writing_recent_not_started, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-<br>
-
-<b>Working towards:</b>
-<% if @writing_recent_working_towards.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Working-towards', :subject => 'English', :subcategory => 'Writing'))  %>
-<% else %> "<%= @writing_recent_working_towards.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@writing_recent_working_towards))  %> | <td><%= link_to 'Delete', @writing_recent_working_towards, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-
-<br>
-
-<b>Working at:</b>
-<% if @writing_recent_working_at.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Working-at', :subject => 'English', :subcategory => 'Writing'))  %>
-<% else %> "<%= @writing_recent_working_at.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@writing_recent_working_at))  %> | <td><%= link_to 'Delete', @writing_recent_working_at, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-<br>
-<b>Greater depth:</b>
-<% if @writing_recent_greater_depth.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Greater-depth', :subject => 'English', :subcategory => 'Writing'))  %>
-<% else %> "<%= @writing_recent_greater_depth.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@writing_recent_greater_depth))  %> | <td><%= link_to 'Delete', @writing_recent_greater_depth, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-
-
-<!-- Reading -->
-
-
-<h4>Reading:</h4>
-<b>Not Started</b>
-<% if @reading_recent_not_started.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Not-started', :subject => 'English', :subcategory => 'Reading'))  %>
-<% else %> "<%= @reading_recent_not_started.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@reading_recent_not_started))  %> | <td><%= link_to 'Delete', @reading_recent_not_started, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-<br>
-
-<b>Working towards:</b>
-<% if @reading_recent_working_towards.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Working-towards', :subject => 'English', :subcategory => 'Reading'))  %>
-<% else %> "<%= @reading_recent_working_towards.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@reading_recent_working_towards))  %> | <td><%= link_to 'Delete', @reading_recent_working_towards, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-
-<br>
-
-<b>Working at:</b>
-<% if @reading_recent_working_at.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Working-at', :subject => 'English', :subcategory => 'Reading'))  %>
-<% else %> "<%= @reading_recent_working_at.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@reading_recent_working_at))  %> | <td><%= link_to 'Delete', @reading_recent_working_at, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
-<br>
-<b>Greater depth:</b>
-<% if @reading_recent_greater_depth.blank? %>
-<%= link_to('Create Generated Feedback', new_generated_feedback_path(:teacher_id => current_user.id, :performance_grade => 'Greater-depth', :subject => 'English', :subcategory => 'Reading'))  %>
-<% else %> "<%= @reading_recent_greater_depth.auto_feedback %>" </li> |
-<%= link_to('Edit', edit_generated_feedback_path(@reading_recent_greater_depth))  %> | <td><%= link_to 'Delete', @reading_recent_greater_depth, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<% end %>
+<%= link_to('Auto feedbacks', edit_auto_gens_path)  %>

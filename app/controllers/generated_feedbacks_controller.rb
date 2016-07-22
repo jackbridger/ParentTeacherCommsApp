@@ -26,38 +26,31 @@ class GeneratedFeedbacksController < ApplicationController
   def create
     @generated_feedback = GeneratedFeedback.new(generated_feedback_params)
 
-    respond_to do |format|
       if @generated_feedback.save
-        format.html { redirect_to @generated_feedback, notice: 'Generated feedback was successfully created.' }
-        format.json { render :show, status: :created, location: @generated_feedback }
-      else
-        format.html { render :new }
-        format.json { render json: @generated_feedback.errors, status: :unprocessable_entity }
-      end
+      redirect_to(edit_auto_gens_path, :notice => "Generated feedback was successfully created.")
+    else
+      redirect_to(edit_auto_gens_path, :notice => "Generated feedback was not successfully created.")
     end
   end
 
   # PATCH/PUT /generated_feedbacks/1
   # PATCH/PUT /generated_feedbacks/1.json
   def update
-    respond_to do |format|
-      if @generated_feedback.update(generated_feedback_params)
-        format.html { redirect_to @generated_feedback, notice: 'Generated feedback was successfully updated.' }
-        format.json { render :show, status: :ok, location: @generated_feedback }
-      else
-        format.html { render :edit }
-        format.json { render json: @generated_feedback.errors, status: :unprocessable_entity }
-      end
+
+    if @generated_feedback.update(generated_feedback_params)
+      redirect_to(edit_auto_gens_path, :notice => "Generated feedback was successfully edited.")
+    else
+      redirect_to(edit_auto_gens_path, :notice => "Generated feedback was not successfully edited.")
     end
   end
 
   # DELETE /generated_feedbacks/1
   # DELETE /generated_feedbacks/1.json
   def destroy
-    @generated_feedback.destroy
-    respond_to do |format|
-      format.html { redirect_to generated_feedbacks_url, notice: 'Generated feedback was successfully destroyed.' }
-      format.json { head :no_content }
+    if @generated_feedback.destroy
+      redirect_to(edit_auto_gens_path, :notice => "Generated feedback was successfully destroyed.")
+    else
+      redirect_to(edit_auto_gens_path, :notice => "Generated feedback was not successfully destroyed.")
     end
   end
 
