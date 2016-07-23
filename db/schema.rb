@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20160716191203) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "english_grades", force: :cascade do |t|
     t.integer  "teacher_id"
     t.integer  "student_id"
@@ -22,8 +25,8 @@ ActiveRecord::Schema.define(version: 20160716191203) do
     t.date     "grade_date"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["student_id"], name: "index_english_grades_on_student_id"
-    t.index ["teacher_id"], name: "index_english_grades_on_teacher_id"
+    t.index ["student_id"], name: "index_english_grades_on_student_id", using: :btree
+    t.index ["teacher_id"], name: "index_english_grades_on_teacher_id", using: :btree
   end
 
   create_table "generated_feedbacks", force: :cascade do |t|
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160716191203) do
     t.string   "subcategory"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["teacher_id"], name: "index_generated_feedbacks_on_teacher_id"
+    t.index ["teacher_id"], name: "index_generated_feedbacks_on_teacher_id", using: :btree
   end
 
   create_table "grades", force: :cascade do |t|
@@ -48,8 +51,8 @@ ActiveRecord::Schema.define(version: 20160716191203) do
     t.string   "subject"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["student_id"], name: "index_grades_on_student_id"
-    t.index ["teacher_id"], name: "index_grades_on_teacher_id"
+    t.index ["student_id"], name: "index_grades_on_student_id", using: :btree
+    t.index ["teacher_id"], name: "index_grades_on_teacher_id", using: :btree
   end
 
   create_table "maths_grades", force: :cascade do |t|
@@ -62,8 +65,8 @@ ActiveRecord::Schema.define(version: 20160716191203) do
     t.date     "grade_date"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["student_id"], name: "index_maths_grades_on_student_id"
-    t.index ["teacher_id"], name: "index_maths_grades_on_teacher_id"
+    t.index ["student_id"], name: "index_maths_grades_on_student_id", using: :btree
+    t.index ["teacher_id"], name: "index_maths_grades_on_teacher_id", using: :btree
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -74,7 +77,7 @@ ActiveRecord::Schema.define(version: 20160716191203) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["teacher_id"], name: "index_tasks_on_teacher_id"
+    t.index ["teacher_id"], name: "index_tasks_on_teacher_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,8 +98,8 @@ ActiveRecord::Schema.define(version: 20160716191203) do
     t.string   "type"
     t.string   "Teacher_name"
     t.string   "teacher_email"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
 end

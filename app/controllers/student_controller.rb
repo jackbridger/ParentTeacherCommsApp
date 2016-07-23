@@ -20,8 +20,6 @@ before_filter do
         @all_maths_grades = current_user.maths_grades.all
         @latest_english_grade = current_user.english_grades.last
 
-        @generated_feedback = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', performance_grade: @latest_english_grade.performance_grade}).first
-
         #English
         #Generated feedback - writing
         @generated_feedback_writing_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Not-started'}).last
