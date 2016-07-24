@@ -22,3 +22,11 @@ test:
     pool: 5
     username: Jack
     password:
+
+production:
+    adapter: postgresql
+    encoding: unicode
+    database: parent_communication_development
+    pool: 5
+    username: Jack
+    password:
