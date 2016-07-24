@@ -5,22 +5,23 @@
 #   gem 'sqlite3'
 #
 
+   default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  username: Jack
+  password:
+
 development:
-    adapter: postgresql
-    encoding: unicode
-    database: store_development
-    pool: 5
-    username: Jack
-    password:
+  <<: *default
+  database: "store_development"
 
 test:
-    adapter: postgresql
-    encoding: unicode
-    database: store_test
-    pool: 5
-    username: Jack
-    password:
-    host: localhost
+  <<: *default
+  database: "store_test"
 
 production:
-   url: <%= ENV['DATABASE_URL'] %>
+  <<: *default
+  database: "store_production"
