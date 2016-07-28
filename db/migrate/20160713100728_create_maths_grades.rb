@@ -2,8 +2,8 @@ class CreateMathsGrades < ActiveRecord::Migration[5.0]
   def change
 
     create_table :maths_grades do |t|
-      t.references :teacher, foreign_key: true
-      t.references :student, foreign_key: true
+      t.references :teacher, references: :users
+      t.references :student, references: :users
       t.string :title
       t.string :subcategory
       t.string :performance_grade
@@ -12,5 +12,7 @@ class CreateMathsGrades < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_foreign_key :maths_grades, :users, column: :teacher_id
+    add_foreign_key :maths_grades, :users, column: :student_id
   end
 end

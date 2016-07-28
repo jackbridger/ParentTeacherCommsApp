@@ -40,21 +40,6 @@ ActiveRecord::Schema.define(version: 20160716191203) do
     t.index ["teacher_id"], name: "index_generated_feedbacks_on_teacher_id", using: :btree
   end
 
-  create_table "grades", force: :cascade do |t|
-    t.integer  "student_id"
-    t.integer  "teacher_id"
-    t.text     "feedback"
-    t.integer  "percentage_score"
-    t.string   "grade_type"
-    t.string   "grade_letter"
-    t.date     "grade_date"
-    t.string   "subject"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["student_id"], name: "index_grades_on_student_id", using: :btree
-    t.index ["teacher_id"], name: "index_grades_on_teacher_id", using: :btree
-  end
-
   create_table "maths_grades", force: :cascade do |t|
     t.integer  "teacher_id"
     t.integer  "student_id"
@@ -83,6 +68,9 @@ ActiveRecord::Schema.define(version: 20160716191203) do
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.string   "type"
+    t.string   "teacher_name"
+    t.string   "teacher_email"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -95,11 +83,14 @@ ActiveRecord::Schema.define(version: 20160716191203) do
     t.string   "last_name"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "type"
-    t.string   "Teacher_name"
-    t.string   "teacher_email"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "english_grades", "users", column: "student_id"
+  add_foreign_key "english_grades", "users", column: "teacher_id"
+  add_foreign_key "generated_feedbacks", "users", column: "teacher_id"
+  add_foreign_key "maths_grades", "users", column: "student_id"
+  add_foreign_key "maths_grades", "users", column: "teacher_id"
+  add_foreign_key "tasks", "users", column: "teacher_id"
 end
