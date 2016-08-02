@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: "from@example.com"
+  default from: "parentcommsapp@gmail.com"
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -20,7 +20,7 @@ class UserMailer < ApplicationMailer
     @user = user
     @greeting = "Hi"
 
-    mail to: @user.email, subject: "New grade created"
+    mail to: @user.email, subject: "New grade created", from: "parentcommsapp@gmail.com"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
