@@ -45,7 +45,7 @@ config.action_mailer.smtp_settings = {
  :domain => 'localhost:3000',
  :port                 => 587,
  :user_name            => 'parentcommsapp@gmail.com',
- :password             => 'parentcommunication1#3212',
+ :password             => 'parentcommunication#123',
  :authentication       => "login",
 :enable_starttls_auto => true
 }
