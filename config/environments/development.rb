@@ -30,7 +30,19 @@ config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+
+  #change mail delivery to either :smtp, :sendmail, :file, :test ---JB (using railscast)
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+ :address              => "smtp.gmail.com",
+ :port                 => 587,
+ :user_name            => ENV['parentcommsapp@gmail.com'],
+ :password             => ENV['parentcommunication'],
+ :authentication       => "plain",
+:enable_starttls_auto => true
+}
 
   config.action_mailer.perform_caching = false
 
