@@ -18,9 +18,7 @@ class UserMailer < ApplicationMailer
   #
   def new_grade(user)
     @user = user
-    @greeting = "Hi"
-
-    mail to: @user.email, subject: "New grade created", from: "parentcommsapp@gmail.com"
+    mail to: @user.email, subject: "New grade created"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
