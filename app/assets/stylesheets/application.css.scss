@@ -1,5 +1,7 @@
 
+
 /*
+
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -15,5 +17,22 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets"
-@import "bootstrap"
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.devise-stuff {
+    padding-top: 300px;
+    width: 200px ;
+    margin-left: auto ;
+    margin-right: auto ;
+}
+
+body {
+    background-image: url('busbackground.jpg');
+    background-size: 100% auto;
+    color: white;
+}
+
+.btn {
+    color:black;
+}
