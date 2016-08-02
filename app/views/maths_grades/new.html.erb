@@ -2,4 +2,4 @@
 
 <%= render 'form', maths_grade: @maths_grade %>
 
-<%= link_to 'Back', maths_grades_path %>
+<%= link_to 'Back', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id) %>
