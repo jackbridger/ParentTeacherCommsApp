@@ -32,6 +32,8 @@ end
     @english_grade.teacher_id = current_user.id
     @student = Student.find(params[:student_id])
     @english_grade.student_id = @student.id
+
+    @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
   end
 
   # GET /english_grades/1/edit

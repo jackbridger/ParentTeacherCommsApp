@@ -3,3 +3,11 @@
 <%= render 'form', maths_grade: @maths_grade %>
 
 <%= link_to 'Back', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id) %>
+
+<div type = 'teacher_tips'>
+
+<h3><%= @tip.title %></h3>
+
+<%= @tip.body %>
+
+</div>

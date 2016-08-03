@@ -59,6 +59,11 @@ before_filter do
 
         #Tasks
         @all_tasks = Task.where({teacher_id: @teacher_other.id}).all
+
+
+        #Tips
+
+        @tip = Tip.where(:audience => 'student').order('RANDOM()').first
     end
 
 #using the incorrect params jst to make it work

@@ -32,6 +32,8 @@ end
     @maths_grade.teacher_id = current_user.id
     @student = Student.find(params[:student_id])
     @maths_grade.student_id = @student.id
+
+    @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
   end
 
   # GET /maths_grades/1/edit
@@ -46,6 +48,7 @@ end
     @maths_grade = MathsGrade.new(maths_grade_params)
     @student = Student.find_by_id(@maths_grade.student_id)
     if @maths_grade.save
+      UserMailer.new_grade(@student).deliver
       redirect_to(student_path(@student), :notice => "Post was successfully created.")
     else
       redirect_to(student_path(@student), :notice => "Post was successfully created.")

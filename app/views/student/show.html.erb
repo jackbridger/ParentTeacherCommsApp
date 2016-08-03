@@ -10,7 +10,7 @@
   <%= link_to('Login', new_user_session_path)  %>
   </li>
 <% end %>
-<h1>student summary </h1>
+<h1>Student summary </h1>
 
 <h2> <%= @student.first_name %> <%= @student.last_name %> </h2>
 
@@ -34,9 +34,7 @@
     </li>
         <li>Feedback: "<%= grades.feedback  %>"
     </li>
-        <li>Grade id:
-        <%=grades.id%>
-    </li>
+
     <%= link_to('Edit', edit_english_grade_path(grades)) %> | <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
 <% end %>
@@ -53,9 +51,7 @@
     </li>
         <li>Feedback: "<%= grades.feedback  %>"
     </li>
-        <li>Grade id:
-        <%=grades.id%>
-    </li>
+
     <%= link_to('Edit', edit_maths_grade_path(grades)) %> |
 <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>

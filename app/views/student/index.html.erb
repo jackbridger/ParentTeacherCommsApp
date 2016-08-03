@@ -18,6 +18,16 @@
         <%= @teacher_other.first_name %> <%= @teacher_other.last_name %>
     <h3>
 
+<!-- Tips for parents -->
+
+<div type = 'teacher_tips'>
+
+<h3><%= @tip.title %></h3>
+
+<p> <%= @tip.body %> </p>
+
+</div>
+
 <h3>Task</h3>
 
 <% @all_tasks.each do |task| %>
