@@ -11,3 +11,18 @@
 <%= @tip.body %>
 
 </div>
+
+
+  <% (@all_tips).each do |n| %>
+   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.title %>" > <p> <%= n.title %></p> </button>
+  <% end %>
+
+
+<script>
+  jQuery.fn.copyToClipBoard = function() {
+      var clip = new ZeroClipboard($(".copy_to_clipboard"));
+  }
+  $(function() {
+    $('.copy_to_clipboard').copyToClipBoard();
+  });
+ </script>

@@ -9,6 +9,9 @@ gem 'rails', '~> 5.0.0'
 gem 'pg'
 
 
+#clipboard
+gem 'zeroclipboard-rails'
+
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
