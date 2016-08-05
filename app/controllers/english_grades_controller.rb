@@ -34,6 +34,8 @@ end
     @english_grade.student_id = @student.id
 
     @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
+
+    @all_tips = Tip.all
   end
 
   # GET /english_grades/1/edit
