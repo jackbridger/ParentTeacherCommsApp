@@ -8,19 +8,13 @@
 
 <div type = 'teacher_tips'>
 
-<h3><%= @tip.title %></h3>
+<h3>Feedback Tip</h3>
 
 <%= @tip.body %>
 
 </div>
 
-<p> test</p>
-
-   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "hello there" > <p> "hello there"</p> </button>
-
-
-   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @tip.title %>" > <p> <%= @tip.title %></p> </button>
-
+<h3>Select shortcuts </h3>
 
   <% (@all_shortcut_texts).each do |n| %>
    <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.body %>" > <p> <%= n.body %></p> </button>
