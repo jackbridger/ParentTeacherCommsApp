@@ -11,6 +11,10 @@ before_filter :authenticate_user!
         #tasks
         @all_tasks = Task.where({teacher_id: current_user.id})
 
+        #shortcut texts
+        @all_shortcut_texts = ShortcutText.where({teacher_id: current_user.id})
+
+
 
     end
 #User.where(teacher_email: current_user.email)

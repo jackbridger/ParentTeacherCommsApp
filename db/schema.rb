@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803104946) do
+ActiveRecord::Schema.define(version: 20160805202521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,14 @@ ActiveRecord::Schema.define(version: 20160803104946) do
     t.datetime "updated_at",        null: false
     t.index ["student_id"], name: "index_maths_grades_on_student_id", using: :btree
     t.index ["teacher_id"], name: "index_maths_grades_on_teacher_id", using: :btree
+  end
+
+  create_table "shortcut_texts", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_shortcut_texts_on_teacher_id", using: :btree
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -100,5 +108,6 @@ ActiveRecord::Schema.define(version: 20160803104946) do
   add_foreign_key "generated_feedbacks", "users", column: "teacher_id"
   add_foreign_key "maths_grades", "users", column: "student_id"
   add_foreign_key "maths_grades", "users", column: "teacher_id"
+  add_foreign_key "shortcut_texts", "users", column: "teacher_id"
   add_foreign_key "tasks", "users", column: "teacher_id"
 end

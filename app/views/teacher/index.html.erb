@@ -39,3 +39,11 @@
 <%= link_to('Auto feedbacks', edit_auto_gens_path)  %>
 
 <h3>Shortcut text</h3>
+<%= link_to('New task', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
+<br>
+<% @all_shortcut_texts.each do |shortcut| %>
+<li>
+    <p><b> <%= shortcut.body %> -  </b>  </p> <%= link_to('Edit', edit_shortcut_text_path(shortcut))  %> | <td><%= link_to 'Delete', shortcut, method: :delete, data: { confirm: 'Are you sure?' } %></td> </p>
+</li>
+<% end %>
+

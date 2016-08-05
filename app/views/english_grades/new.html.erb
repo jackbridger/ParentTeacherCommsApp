@@ -22,8 +22,8 @@
    <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @tip.title %>" > <p> <%= @tip.title %></p> </button>
 
 
-  <% (@all_tips).each do |n| %>
-   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.title %>" > <p> <%= n.title %></p> </button>
+  <% (@all_shortcut_texts).each do |n| %>
+   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.body %>" > <p> <%= n.body %></p> </button>
   <% end %>
 
 

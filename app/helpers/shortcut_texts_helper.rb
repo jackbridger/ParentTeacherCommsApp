@@ -1,0 +1,2 @@
+module ShortcutTextsHelper
+end

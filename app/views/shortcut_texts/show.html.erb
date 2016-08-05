@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @shortcut_text.teacher %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @shortcut_text.body %>
+</p>
+
+<%= link_to 'Edit', edit_shortcut_text_path(@shortcut_text) %> |
+<%= link_to 'Back', shortcut_texts_path %>
