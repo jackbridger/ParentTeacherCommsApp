@@ -35,7 +35,7 @@ end
 
     @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
 
-    @all_tips = Tip.all
+    @all_shortcut_texts = ShortcutText.where(:teacher_id => current_user.id).all
   end
 
   # GET /maths_grades/1/edit

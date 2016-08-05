@@ -38,8 +38,10 @@
 
 <%= link_to('Auto feedbacks', edit_auto_gens_path)  %>
 
+
+
 <h3>Shortcut text</h3>
-<%= link_to('New task', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
+<%= link_to('New Shortcut text', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
 <br>
 <% @all_shortcut_texts.each do |shortcut| %>
 <li>
