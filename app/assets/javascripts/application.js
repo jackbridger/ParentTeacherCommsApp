@@ -31,263 +31,147 @@ $('#navbar li').click(function() {
 
 
 /*
+*******
+TEACHER
+SEARCH
+FUNCTION
+*******
+ */
+
+ (function() {
+  // TODO: be more elegant here
+  function format(text) {
+    return text.replace(/ /g,'').replace(/(<([^>]+)>)/ig, '').toLowerCase();
+  }
+
+  var SearchOnList = {
+    $LIST           : '[data-search-on-list=list]',
+    $SEARCH         : '[data-search-on-list=search]',
+    $LIST_ITEM      : '[data-search-on-list=list-item]',
+    $COUNTER        : '[data-search-on-list=counter]',
+    TEMPLATE_EMTPY  : '<li class="list-item list-item--disable">No results found</li>',
 
 
-TESTIMONIAL STUFF
+    init: function($element) {
+      this.items = [];
+      this.itemsMatched = [];
 
-*/
+      this.$element = $element;
+      this.$list = this.$element.find(this.$LIST);
+      this.$search = this.$element.find(this.$SEARCH);
+      this.$counter = this.$element.find(this.$COUNTER);
 
-(function($) {
+      this.items = this._getAllItems();
+      this.itemsMatched = this.items;
 
-    var Slider = (function () {
+      this._updateCounter();
+      this._handleResults();
+      this._setEventListeners();
+    },
 
-        function _Slider(element, settings) {
-            this.defaults = {
-                slideDuration: '3000',
-                speed: 500
-                /*
-                ,
-                arrowRight: '.right-arrow',
-                arrowLeft: '.left-arrow'
-                */
-            };
+    _setEventListeners: function() {
+      this.$search
+        .on('keyup', $.proxy(this._onKeyup, this))
+        .on('query:changed', $.proxy(this._handleQueryChanged, this))
+        .on('query:results:some', $.proxy(this._handleResults, this))
+        .on('query:results:none', $.proxy(this._handleNoResults, this))
+    },
 
-            this.settings = $.extend({}, this.defaults, settings);
+    _onKeyup: function() {
+      var query = this.$search.val(),
+          previousQuery = this.$search.data('previousQuery', query);
 
-            this.initials = {
-                currentSlide: 0,
-                $currentSlide: null,
-                totalSlides: false,
-                cssTransitions: false
-            };
-
-            $.extend(this, this.initials);
-
-            this.$el = $(element);
-
-            this.changeSlide = $.proxy(this.changeSlide, this);
-
-            this.init();
-
-        }
-
-        return _Slider;
-
-    })();
-
-    Slider.prototype.init = function () {
-        this.cssTransitionTest();
-        this.$el.addClass('slider');
-        this.build();
-        this.events();
-        this.activate();
-        this.initTimer();
-    };
-
-    Slider.prototype.cssTransitionTest = function () {
-        var elem = document.createElement('modernizr');
-
-        var props = ['transition', 'WebkitTransition', 'MozTransition', 'OTransition', 'msTransition'];
-
-        for (var i in props) {
-            var prop = props[i];
-            var result = elem.style[prop] !== undefined ? prop : false;
-            if (result) {
-                this.cssTransitions = result;
-                break;
-            }
-        }
-    };
-
-    Slider.prototype.addCSSDuration = function () {
-        var sliderModule = this;
-
-        sliderModule.$el.find('.testimonial-slide').each(function () {
-
-            this.style[sliderModule.cssTransitions + 'Duration'] = sliderModule.settings.speed + 'ms';
+      // TODO: Decide when query actually changed
+      if (this._queryChanged()) {
+        this.$search.trigger('query:changed', {
+          query: query,
+          previousQuery: previousQuery
         });
-    };
+      }
+    },
 
-    Slider.prototype.removeCSSDuration = function () {
-        var sliderModule = this;
+    _queryChanged: function() {
+      var query = this.$search.val();
+      if ($.trim(query).length === 0 && this.$search.data('previousQuery') === undefined) {
+        return false;
+      }
+      return true;
+    },
 
-        //here we are using 'this' but we can also write sliderModule
-        //since we are refering to the same element...shorter and cleaner
-        this.$el.find('.testimonial-slide').each(function () {
-            this.style[sliderModule.cssTransitions + 'Duration'] = '';
-        });
-    };
-
-
-    //create indicator dots below which also have the functionality
-    //as the arrows
-    Slider.prototype.build = function () {
-        var $indicators = this.$el.append("<ul class='dots-wrapper'>").find('.dots-wrapper');
-        this.totalSlides = this.$el.find('.testimonial-slide').length;
-        for (var i = 0; i < this.totalSlides; i++) {
-            $indicators.append("<li data-index=" + i + ">");
+    _handleQueryChanged: function(e, data) {
+      this.itemsMatched = this.items.map(function(item) {
+        if (format(item.name).match(format(data.query))) {
+          return {
+            name: item.name,
+            visible: true
+          }
         }
-    };
-
-    Slider.prototype.activate = function () {
-        this.$currentSlide = this.$el.find('.testimonial-slide').eq(0);
-        this.$el.find('.dots-wrapper li').eq(0).addClass('active');
-    };
-
-    Slider.prototype.events = function () {
-        $('body')
-            .on('click', this.settings.arrowRight, {
-            direction: 'right'
-        }, this.changeSlide)
-            .on('click', this.settings.arrowLeft, {
-            direction: 'left'
-        }, this.changeSlide)
-            .on('click', '.dots-wrapper li', this.changeSlide);
-    };
-
-    Slider.prototype.clearTimer = function () {
-        if (this.timer) {
-            clearInterval(this.timer);
+        return {
+          name: item.name,
+          visible: false
         }
-    };
+      });
 
-    Slider.prototype.initTimer = function () {
-        this.timer = setInterval(
-        this.changeSlide, this.settings.slideDuration);
-    };
+      this._render();
+      this._updateCounter();
+    },
 
-    Slider.prototype.startTimer = function () {
-        this.initTimer();
-        this.throttle = false;
-    };
+    _handleNoResults: function() {
+      this.$list.html(this.TEMPLATE_EMTPY);
+    },
 
-    Slider.prototype.changeSlide = function (e) {
-        if (this.throttle) {
-            return;
+    _handleResults: function() {
+      this.$list.empty().append(this._renderItemsVisible())
+    },
+
+    _someItemsVisible: function() {
+      return this.itemsMatched.some(function(item) {
+        return item.visible;
+      });
+    },
+
+    _render: function() {
+      (this._someItemsVisible()) ?
+        this.$search.trigger('query:results:some') :
+        this.$search.trigger('query:results:none');
+    },
+
+    _updateCounter: function() {
+      (this._someItemsVisible()) ?
+        this.$counter.text(this._renderItemsVisible().length) :
+        this.$counter.text('');
+    },
+
+    _getAllItems: function() {
+      var $items = this.$list.find(this.$LIST_ITEM);
+
+      return $items.map(function() {
+        var $item = $(this);
+
+        return {
+          name: $item.html(),
+          visible: true
+        };
+      }).toArray();
+    },
+
+    _renderItemsVisible: function() {
+      var itemInTemplate;
+      return this.itemsMatched.sort(function(a, b) {
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1;
+        return 0;
+      }).reduce(function(items, item) {
+        itemInTemplate = '<li class="list-item" data-search-on-list="list-item">' + item.name + '</li>';
+        if (item.visible) {
+          items.push(itemInTemplate);
         }
-        this.throttle = true;
-
-        this.clearTimer();
-
-        var direction = this._direction(e);
-
-        var animate = this._next(e, direction);
-        if (!animate) {
-            return;
-        }
-
-        var $nextSlide = this.$el.find('.testimonial-slide').eq(this.currentSlide).addClass(direction + ' active');
-
-        if (!this.csstransitions) {
-            this._jsAnimation($nextSlide, direction);
-        } else {
-            this._cssAnimation($nextSlide, direction);
-        }
-    };
-
-    Slider.prototype._direction = function (e) {
-        var direction;
-        if (typeof e !== 'undefined') {
-            direction = (typeof e.data === 'undefined' ? 'right' : e.data.direction);
-        } else {
-            direction = 'right';
-        }
-        return direction;
-    };
-
-    Slider.prototype._next = function (e, direction) {
-        var index = (typeof e !== 'undefined' ? $(e.currentTarget).data('index') : undefined);
-        switch (true) {
-            case (typeof index !== 'undefined'):
-                if (this.currentSlide == index) {
-                    this.startTimer();
-                    return false;
-                }
-                this.currentSlide = index;
-                break;
-            case (direction == 'right' && this.currentSlide < (this.totalSlides - 1)):
-                this.currentSlide++;
-                break;
-            case (direction == 'right'):
-                this.currentSlide = 0;
-                break;
-            case (direction == 'left' && this.currentSlide === 0):
-                this.currentSlide = (this.totalSlides - 1);
-                break;
-            case (direction == 'left'):
-                this.currentSlide--;
-                break;
-        }
-        return true;
-    };
-
-    Slider.prototype._cssAnimation = function ($nextSlide, direction) {
-        setTimeout(function () {
-            this.$el.addClass('transition');
-            this.addDuration();
-            this.$currentSlide.addClass('shift' + direction);
-        }.bind(this), 100);
-
-        setTimeout(function () {
-            this.$el.removeClass('transition');
-            this.removeCSSDuration();
-            this.$currentSlide.removeClass('active shift-left shift-right');
-            this.$currentSlide = $nextSlide.removeClass(direction);
-            this._updateIndicators();
-            this.startTimer();
-        }.bind(this), 100 + this.settings.speed);
-    };
-
-    Slider.prototype._jsAnimation = function ($nextSlide, direction) {
-        var sliderModule = this;
-
-        if (direction == 'right') {
-            sliderModule.$currentSlide.addClass('js-reset-left');
-        }
-        var animation = {};
-        animation[direction] = '0%';
-
-        var animationPrev = {};
-        animationPrev[direction] = '100%';
-
-        this.$currentSlide.animate(animationPrev, this.settings.speed);
-
-        $nextSlide.animate(animation, this.settings.speed, 'swing', function () {
-            sliderModule.$currentSlide.removeClass('active js-reset-left').attr('style', '');
-            sliderModule.$currentSlide = $nextSlide.removeClass(direction).attr('style', '');
-            sliderModule._updateIndicators();
-            sliderModule.startTimer();
-        });
-    };
-
-    Slider.prototype._updateIndicators = function () {
-        this.$el.find('.dots-wrapper li').removeClass('active').eq(this.currentSlide).addClass('active');
-    };
-
-    $.fn.Slider = function (options) {
-        return this.each(function (index, el) {
-            el.Slider = new Slider(el, options);
-        });
-    };
-})(jQuery);
-
-var args = {
-    arrowRight: '.right-arrow',
-    arrowLeft: '.left-arrow',
-    speed: 500,
-    slideDuration: 3000
-};
-
-$('.testimonial').Slider(args);
-
-
-/*
-var biggestHeight = "0";
-$(".testimonial .testimonial-ul > .testimonial-slide.active").each(function(){
-    if ($(this).height() > biggestHeight ) {
-      biggestHeight = $(this).height()
+        return items;
+      }, []);
     }
-});
+  };
 
-$(".testimonial .testimonial-ul").height(biggestHeight);
-*/
+  window.SearchOnList = SearchOnList;
+})();
+
+SearchOnList.init($('[data-behaviour=search-on-list]'));
