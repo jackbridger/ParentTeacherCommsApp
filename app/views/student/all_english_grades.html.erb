@@ -4,7 +4,7 @@
 
 <% if user_signed_in? %>
 <ul id="navbar">
-    <li><%= link_to('Home', root_path)  %></li>
+    <li class="active"><%=link_to('Home', root_path)%></li>
     <li><%= link_to('Settings', edit_user_registration_path)  %></li>
     <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
 </ul>
@@ -14,8 +14,3 @@
     <li><%= link_to('Login', new_user_session_path)  %></li>
 </ul>
 <% end %>
-<h1>New Generated Feedback</h1>
-
-<%= render 'form', generated_feedback: @generated_feedback %>
-
-<%= link_to 'Back', edit_auto_gens_path %>

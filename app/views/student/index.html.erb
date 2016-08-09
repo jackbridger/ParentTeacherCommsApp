@@ -4,18 +4,18 @@
 
 <% if user_signed_in? %>
 <ul id="navbar">
-    <li class="active"><a href="#">Home</a></li>
+    <li class="active"><%=link_to('Home', root_path)%></li>
     <li><%= link_to('Settings', edit_user_registration_path)  %></li>
     <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
 </ul>
 <% else %>
 <ul id="navbar">
-    <li class="active"><a href="#">Home</a></li>
+    <li><%= link_to('Home', root_path)  %></li>
     <li><%= link_to('Login', new_user_session_path)  %></li>
 </ul>
 <% end %>
 
-<h1> Welcome <%= current_user.first_name %> <%= current_user.last_name %> (Student) </h1>
+<h1><%= current_user.first_name %> <%= current_user.last_name %> (Student) </h1>
 
 
     <h5>Teacher:
@@ -33,20 +33,6 @@
 </div>
 
 
-  <div class="card">
-    <div class="card-actions animate">
-      <a href="#">edit</a>
-      <a href="#">remove</a>
-    </div>
-    <h1 class="card-header">Spelling Test</h1>
-    <h2 class="card-subheader">Spelling - Monday 21st July</h2>
-    <hr class="card-divider" />
-    <li>Performance: Not-Started</li>
-    <li>Feedback: Very good</li>
-    <li>Generated Feedback: Must work on really understanding the content</li>
-  </div>
-
-
 
 <% unless @all_tasks.blank? %>
     <h3>Task</h3>
@@ -62,30 +48,16 @@
 
 
 <% unless @all_english_grades.blank? %>
-<h3>List of English grades</h3>
+<h3>Most recent English grades</h3>
 <% end %>
 
-<% @all_english_grades.each do |grades| %>
+<% @latest_two_english_grade.each do |grades| %>
   <div class="card">
-    <div class="card-actions animate">
-      <a href="#">edit</a>
-      <a href="#">remove</a>
-    </div>
-    <h1 class="card-header">Spelling Test</h1>
-    <h2 class="card-subheader">Spelling - Monday 21st July</h2>
+    <h1 class="card-header"><%= grades.title %> </h1>
+    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
     <hr class="card-divider" />
-    <li>Performance: Not-Started</li>
-    <li>Feedback: Very good</li>
-    <li>Generated Feedback: Must work on really understanding the content</li>
-  </div>
-
-
-<h4><%= grades.title %> (<%=grades.subcategory%>) <%= grades.grade_date %></h4>
-    <li>Performance:
-        <%=grades.performance_grade  %>
-    </li>
-    <li>Feedback: "<%= grades.feedback  %>"
-    </li>
+    <li>Performance: <%=grades.performance_grade  %></li>
+    <li>Feedback: "<%= grades.feedback  %>"</li>
     <% if grades.performance_grade == 'Not-started' && grades.subcategory == 'Writing' %>
 
         <% unless @generated_feedback_writing_not_started.blank? %>
@@ -136,24 +108,29 @@
              <li> Generated feedback:  <%= @generated_feedback_reading_greater_depth.auto_feedback %> </li>
         <% end -%>
     <% end %>
-
+</div>
 <% end %>
+
+<%= link_to('View all English Grades', new_user_session_path)  %>
+
 
 
 <!-- Maths grades -->
 
 
 <% unless @all_maths_grades.blank? %>
-<h3>List of Maths grades</h3>
+<h3>Most recent Maths grades</h3>
 <% end %>
-<% @all_maths_grades.each do |grades| %>
-<h4><%= grades.title %> (<%=grades.subcategory%>) <%= grades.grade_date %></h4>
-    <li>Performance:
-        <%=grades.performance_grade  %>
-    </li>
-    <li>Feedback: "<%= grades.feedback  %>"
-    </li>
-    <% if grades.performance_grade == 'Not-started' && grades.subcategory == 'Number' %>
+<% @latest_two_maths_grade.each do |grades| %>
+
+
+  <div class="card">
+    <h1 class="card-header"><%= grades.title %> </h1>
+    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
+    <hr class="card-divider" />
+    <li>Performance: <%=grades.performance_grade  %></li>
+    <li>Feedback: "<%= grades.feedback  %>"</li>
+ <% if grades.performance_grade == 'Not-started' && grades.subcategory == 'Number' %>
 
         <% unless @generated_feedback_number_not_started.blank? %>
              <li> Generated feedback:  <%= @generated_feedback_number_not_started.auto_feedback %> </li>
@@ -203,5 +180,10 @@
              <li> Generated feedback:  <%= @generated_feedback_geometry_greater_depth.auto_feedback %> </li>
         <% end -%>
     <% end %>
-
+  </div>
 <% end %>
+
+
+<%= link_to('View all Maths Grades', new_user_session_path)  %>
+
+

@@ -17,8 +17,10 @@ before_filter do
         #really hacky but so that i can still do .each and with this select a single teacher
         @teacher_other = Teacher.where('email' => current_user.teacher_email).first
         @all_english_grades = current_user.english_grades.all
+
         @all_maths_grades = current_user.maths_grades.all
-        @latest_english_grade = current_user.english_grades.last
+        @latest_two_english_grade = EnglishGrade.where(:student_id => current_user.id).last(2)
+        @latest_two_maths_grade = MathsGrade.where(:student_id => current_user.id).last(2)
 
         #English
         #Generated feedback - writing
@@ -72,6 +74,15 @@ before_filter do
         @all_maths_grades = @student.maths_grades.all
     @all_english_grades = @student.english_grades.all
     end
+
+    def all_english_grades
+
+    end
+
+    def all_maths_grades
+
+    end
+
 
 
 end
