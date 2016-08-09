@@ -1,34 +1,56 @@
+<head>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+
 <% if user_signed_in? %>
-  <li>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-  </li>
-      <li>
-  <%= link_to('Settings', edit_user_registration_path)  %>
-  </li>
+<ul id="navbar">
+    <li class="active"><a href="#">Home</a></li>
+    <li><%= link_to('Settings', edit_user_registration_path)  %></li>
+    <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+</ul>
 <% else %>
-  <li>
-  <%= link_to('Login', new_user_session_path)  %>
-  </li>
+<ul id="navbar">
+    <li class="active"><a href="#">Home</a></li>
+    <li><%= link_to('Login', new_user_session_path)  %></li>
+</ul>
 <% end %>
 
 <h1> Welcome <%= current_user.first_name %> <%= current_user.last_name %> (Student) </h1>
 
 
-    <h3>Teacher:
+    <h5>Teacher:
         <%= @teacher_other.first_name %> <%= @teacher_other.last_name %>
-    <h3>
+    <h5>
 
 <!-- Tips for parents -->
 
 <div type = 'teacher_tips'>
 
-<h3><%= @tip.title %></h3>
+<h3>Feedback tip</h3>
 
 <p> <%= @tip.body %> </p>
 
 </div>
 
-<h3>Task</h3>
+
+  <div class="card">
+    <div class="card-actions animate">
+      <a href="#">edit</a>
+      <a href="#">remove</a>
+    </div>
+    <h1 class="card-header">Spelling Test</h1>
+    <h2 class="card-subheader">Spelling - Monday 21st July</h2>
+    <hr class="card-divider" />
+    <li>Performance: Not-Started</li>
+    <li>Feedback: Very good</li>
+    <li>Generated Feedback: Must work on really understanding the content</li>
+  </div>
+
+
+
+<% unless @all_tasks.blank? %>
+    <h3>Task</h3>
+<% end %>
 
 <% @all_tasks.each do |task| %>
 <li>
@@ -36,8 +58,28 @@
 </li>
 <% end %>
 
+
+
+
+<% unless @all_english_grades.blank? %>
 <h3>List of English grades</h3>
+<% end %>
+
 <% @all_english_grades.each do |grades| %>
+  <div class="card">
+    <div class="card-actions animate">
+      <a href="#">edit</a>
+      <a href="#">remove</a>
+    </div>
+    <h1 class="card-header">Spelling Test</h1>
+    <h2 class="card-subheader">Spelling - Monday 21st July</h2>
+    <hr class="card-divider" />
+    <li>Performance: Not-Started</li>
+    <li>Feedback: Very good</li>
+    <li>Generated Feedback: Must work on really understanding the content</li>
+  </div>
+
+
 <h4><%= grades.title %> (<%=grades.subcategory%>) <%= grades.grade_date %></h4>
     <li>Performance:
         <%=grades.performance_grade  %>
@@ -101,7 +143,9 @@
 <!-- Maths grades -->
 
 
+<% unless @all_maths_grades.blank? %>
 <h3>List of Maths grades</h3>
+<% end %>
 <% @all_maths_grades.each do |grades| %>
 <h4><%= grades.title %> (<%=grades.subcategory%>) <%= grades.grade_date %></h4>
     <li>Performance:

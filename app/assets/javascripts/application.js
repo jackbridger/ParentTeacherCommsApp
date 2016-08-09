@@ -16,3 +16,14 @@
 //= require bootstrap-sprockets
 //= require_tree .
 //= require zeroclipboard
+ /*
+  **********************************************************
+  * OPAQUE NAVBAR SCRIPT
+  **********************************************************
+  */
+
+  // Toggle tranparent navbar when the user scrolls the page
+
+$('#navbar li').click(function() {
+    $(this).addClass('active').siblings('li').removeClass('active');
+});

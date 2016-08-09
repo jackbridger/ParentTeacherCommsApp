@@ -1,5 +1,11 @@
 class UserMailer < ApplicationMailer
   default from: "parentcommsapp@gmail.com"
+
+  def new_grade(user)
+    @user = user
+    mail to: @user.email, subject: "New grade created"
+  end
+
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -16,10 +22,7 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.new_grade.subject
   #
-  def new_grade(user)
-    @user = user
-    mail to: @user.email, subject: "New grade created"
-  end
+
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:

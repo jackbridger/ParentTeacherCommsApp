@@ -20,18 +20,252 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.devise-stuff {
-    padding-top: 300px;
-    width: 200px ;
-    margin-left: auto ;
-    margin-right: auto ;
+
+    body {
+        background-color: #FBFCFF;
+        padding-top: 70px;
+        color: #011638;
+        padding-left: 12px;
+        font-family: 'Open Sans', sans-serif;
+
+    }
+
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 100;
+        color: steelblue;
+    }
+
+    h3 {
+        color: #87907D;
+    }
+
+    .body li {
+        color: #05A8AA;
+
+    }
+
+
+#pins {
+  margin: 0 auto;
+  width: 100%;
+  .box {
+      margin: 10px;
+      width: 350px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+      border-radius: 7px;
+      text-align: center;
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      h2 {
+        font-size: 22px;
+        margin: 0;
+        padding: 25px 10px;
+        a {
+                color: #474747;
+        }
+      }
+      .user {
+        font-size: 12px;
+        border-top: 1px solid #EAEAEA;
+            padding: 15px;
+            margin: 0;
+      }
+    }
 }
 
-body {
-    background-color: #9BD1FA;
-
+#edit_page {
+    .current_image {
+        img {
+            display: block;
+            margin: 20px 0;
+        }
+    }
 }
 
-.btn {
-    color: black;
+#pin_show {
+    .panel-heading {
+        padding: 0;
+    }
+    .pin_image {
+        img {
+            max-width: 100%;
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    .panel-body {
+        padding: 35px;
+        h1 {
+            margin: 0 0 10px 0;
+        }
+        .description {
+            color: #868686;
+            line-height: 1.75;
+            margin: 0;
+        }
+    }
+    .panel-footer {
+        padding: 20px 35px;
+        p {
+            margin: 0;
+        }
+        .user {
+            padding-top: 8px;
+        }
+    }
+}
+
+textarea {
+    min-height: 250px;
+}
+
+
+/* sorts the links out */
+a {color: black}      /* unvisited link */
+a:visited {color:black;}  /* visited link */
+a:hover {color:black;}  /* mouse over link */
+a:active {color:black;}  /* selected link */
+
+
+
+
+
+
+
+html, body {
+    height: 100%;
+}
+
+
+#navbar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #222;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+#navbar li {
+    position: relative;
+    float: left;
+    line-height: 60px;
+    background: inherit;
+    text-align: center;
+    transition: all .2s;
+}
+
+#navbar li a {
+    position: relative;
+    display: block;
+    padding: 0 20px;
+    line-height: inherit;
+    color: white;
+    text-decoration: none;
+}
+
+#navbar li:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -30px;
+    width: 60px;
+    height: 60px;
+    background: #222;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    transition: all 0, background .2s;
+}
+#navbar li:hover:before {
+    margin-top: 1px;
+    border-radius: 50% 50% 0 50%;
+    transition: all .1s, background .2s, margin-top .2s cubic-bezier(.5,30,.2,0);
+}
+#navbar li:hover,
+#navbar li:hover:before {
+    background: #3a3a3a;
+}
+#navbar li.active,
+#navbar li.active:before {
+    background: steelblue;
+}
+
+
+/* Cards */
+.card {
+  background-color: #fff;
+  border-radius: 0.2em;
+  padding: 1em;
+  margin:1em;
+  border: 1px solid #e8e8e8;
+  opacity: 0.8;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  &:hover {
+    opacity: 1;
+    box-shadow: 1px 2px rgba(139, 139, 139, 0.2);
+    .card-header {
+      color: #3980c7;
+    }
+    .card-subheader {
+      color: rgba(127, 176, 196, 0.79);
+    }
+  }
+  .card-header {
+    text-transform: lowercase;
+    font-weight: 200;
+    font-family: 'Roboto';
+    margin: 0;
+    padding: 0;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-weight: 100;
+    color: #bbb;
+    transition: color 0.2s;
+    &.darker {
+      color: #949494;
+    }
+  }
+  .card-subheader {
+    text-transform: lowercase;
+    margin: 0;
+    padding: 0;
+    font-weight: 100;
+    color: #cecece;
+    transition: color 0.2s;
+    font-size: 16px;
+    line-height: 20px;
+    &.darker {
+      color: #949494;
+    }
+  }
+  .card-divider {
+    margin-top: 11px;
+  }
+.card-actions {
+    float: right;
+    margin: -10px 3px 15px 0;
+    padding: 0;
+    &.animate {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+  }
+  &:hover {
+    .card-actions {
+      &.animate {
+        opacity: 1;
+      }
+    }
+  }
 }

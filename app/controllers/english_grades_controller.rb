@@ -53,9 +53,8 @@ end
         UserMailer.new_grade(@student).deliver
         redirect_to(student_path(@student), :notice => "Post was successfully created.")
       else
-redirect_to(student_path(@student), :notice => "Post was successfully created.")
+        redirect_to(student_path(@student), :notice => "Post was not created.")
       end
-
   end
 
   # PATCH/PUT /english_grades/1
