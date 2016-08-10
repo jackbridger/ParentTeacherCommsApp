@@ -37,7 +37,7 @@ SEARCH
 FUNCTION
 *******
  */
-
+$(document).ready(function() {
  (function() {
   // TODO: be more elegant here
   function format(text) {
@@ -175,3 +175,5 @@ FUNCTION
 })();
 
 SearchOnList.init($('[data-behaviour=search-on-list]'));
+
+});

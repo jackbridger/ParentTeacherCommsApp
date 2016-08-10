@@ -1,6 +1,9 @@
 <head>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
 </head>
+
 
 <% if user_signed_in? %>
 <ul id="navbar">
@@ -31,13 +34,6 @@
 <% end %>
 
 <!-- List of the students -->
-<h3>List of students</h3>
-
-<% @all_students.each do |student| %>
-    <li>
-        <%= link_to student.first_name, student %>
-    </li>
-<% end %>
 
 
 <%= link_to('Auto feedbacks', edit_auto_gens_path)  %>
@@ -60,66 +56,12 @@
   <span class="counter" data-search-on-list="counter"></span>
   <div class="list-wrap">
   <ul class="list" data-search-on-list="list">
+    <% @all_students.each do |student| %>
     <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Ali <span class="item-list-subtext">Smith</span></a>
+      <a href="../student/<%= student.id%>" class="list-item-link"> <%= student.first_name %> <span class="item-list-subtext"><%= student.last_name %></span></a>
     </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Alia <span class="item-list-subtext">Johnson</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Amira<span class="item-list-subtext">Johnson</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Omar<span class="item-list-subtext">Davis</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Aaron<span class="item-list-subtext">Davis</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Bailey <span class="item-list-subtext">Moore</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Noah<span class="item-list-subtext">Thomas</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Liam<span class="item-list-subtext">Garcia</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Dakota<span class="item-list-subtext">Garcia</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Olivia<span class="item-list-subtext">Taylor</span></a>
-    </li>
-    <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Mason<span class="item-list-subtext">Garcia</span></a>
-    </li>
-       <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Abigail<span class="item-list-subtext">Martin</span></a>
-    </li>
-       <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Emily<span class="item-list-subtext">Robinson</span></a>
-    </li>
-       <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Emily<span class="item-list-subtext">García</span></a>
-    </li>
-       <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">John<span class="item-list-subtext">Robinson</span></a>
-    </li>
-           <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Emily<span class="item-list-subtext">Clark</span></a>
-    </li>
-           <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Aurora<span class="item-list-subtext">Lewis</span></a>
-    </li>
-           <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Adeline<span class="item-list-subtext">Robinson</span></a>
-    </li>
-           <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">John<span class="item-list-subtext">García</span></a>
-    </li>
-               <li class="list-item" data-search-on-list="list-item">
-      <a href="" class="list-item-link">Isla<span class="item-list-subtext">Lewis</span></a>
-    </li>
+<% end %>
+
   </ul>
   </div>
 </div>
