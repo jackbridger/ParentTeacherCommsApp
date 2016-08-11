@@ -21,7 +21,7 @@
 @import "bootstrap";
 
 
-    body {
+body {
         background-color: #FBFCFF;
         padding-top: 70px;
         color: #011638;
@@ -29,6 +29,11 @@
         font-family: 'Open Sans', sans-serif;
 
     }
+
+.body welcome
+{
+  background: url("https://photos-6.dropbox.com/t/2/AABO-zyEY2tOjMWLE104A8VUTNP-OKx3304nOyxkkd4SUA/12/232060938/jpeg/32x32/1/_/1/2/2015-09-Life-of-Pix-free-stock-photos-road-desert-bus-fresonneveld.jpg/EMGkycQBGNe4AiAHKAc/1FCxtUYuYCMA_UVWkGTRrrdc-EXOXR8d4yf0iBn_sZg?dl=0&size=2048x1536&size_mode=3");
+}
 
 
     h1, h2, h3, h4, h5, h6 {
@@ -125,11 +130,15 @@ textarea {
 
 
 /* sorts the links out */
-a {color: black}      /* unvisited link */
-a:visited {color:black;}  /* visited link */
-a:hover {color:black;}  /* mouse over link */
-a:active {color:black;}  /* selected link */
+a {background-color: transparent;}      /* unvisited link */
+a:visited {background-color:transparent;}  /* visited link */
+a:hover {background-color:transparent;}  /* mouse over link */
+a:active {background-color:transparent;}  /* selected link */
 
+a {color: steelblue;}      /* unvisited link */
+a:visited {color: steelblue;}  /* visited link */
+a:hover {color: steelblue;}  /* mouse over link */
+a:active {color: steelblue;}  /* selected link */
 
 
 
@@ -391,4 +400,14 @@ $dark-grey: darken($grey, 10%);
 
 
 
+
+/*
+*******
+*******
+*******
+BUTTONS*
+*******
+*******
+*******
+*/
 

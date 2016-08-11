@@ -4,8 +4,8 @@
 
 <% if user_signed_in? %>
 <ul id="navbar">
-    <li class="active"><%= link_to('Home', root_path)  %></li>
-    <li><%= link_to('Settings', edit_user_registration_path)  %></li>
+    <li><%= link_to('Home', root_path)  %></li>
+    <li class="active"><%= link_to('Settings', edit_user_registration_path)  %></li>
     <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
 </ul>
 <% else %>

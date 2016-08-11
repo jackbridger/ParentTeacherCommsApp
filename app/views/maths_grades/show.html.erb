@@ -1,39 +1,84 @@
-<p id="notice"><%= notice %></p>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
 
-<p>
-  <strong>Teacher:</strong>
-  <%= @maths_grade.teacher %>
-</p>
+<% if user_signed_in? %>
+<ul id="navbar">
+    <li class="active"><%=link_to('Home', root_path)%></li>
+    <li><%= link_to('Settings', edit_user_registration_path)  %></li>
+    <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+</ul>
+<% else %>
+<ul id="navbar">
+    <li><%= link_to('Home', root_path)  %></li>
+    <li><%= link_to('Login', new_user_session_path)  %></li>
+</ul>
+<% end %>
+<h1>All maths grades </h2>
 
-<p>
-  <strong>Student:</strong>
-  <%= @maths_grade.student %>
-</p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @maths_grade.title %>
-</p>
 
-<p>
-  <strong>Subcategory:</strong>
-  <%= @maths_grade.subcategory %>
-</p>
+<% @all_maths_grades.each do |grades| %>
+  <div class="card">
+    <h1 class="card-header"><%= grades.title %> </h1>
+    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
+    <hr class="card-divider" />
+    <li>Performance: <%=grades.performance_grade  %></li>
+    <li>Feedback: "<%= grades.feedback  %>"</li>
+ <% if grades.performance_grade == 'Not-started' && grades.subcategory == 'Number' %>
 
-<p>
-  <strong>Performance grade:</strong>
-  <%= @maths_grade.performance_grade %>
-</p>
+        <% unless @generated_feedback_number_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_number_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Number' %>
+        <% unless @generated_feedback_number_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_number_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Number' %>
+        <% unless @generated_feedback_number_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_number_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Number' %>
+        <% unless @generated_feedback_number_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_number_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Not-started' && grades.subcategory == 'Measurement' %>
+        <% unless @generated_feedback_measurement_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_measurement_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Measurement' %>
+        <% unless @generated_feedback_measurement_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_measurement_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Measurement' %>
+        <% unless @generated_feedback_measurement_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_measurement_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Measurement' %>
+        <% unless @generated_feedback_measurement_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_measurement_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Not-started' && grades.subcategory == 'Geometry' %>
+        <% unless @generated_feedback_geometry_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_geometry_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Geometry' %>
+        <% unless @generated_feedback_geometry_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_geometry_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Geometry' %>
+        <% unless @generated_feedback_geometry_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_geometry_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Geometry' %>
+        <% unless @generated_feedback_geometry_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_geometry_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% end %>
+  </div>
+<% end %>
 
-<p>
-  <strong>Feedback:</strong>
-  <%= @maths_grade.feedback %>
-</p>
+<br>
 
-<p>
-  <strong>Grade date:</strong>
-  <%= @maths_grade.grade_date %>
-</p>
 
-<%= link_to 'Edit', edit_maths_grade_path(@maths_grade) %> |
-<%= link_to 'Back', maths_grades_path %>
+<%= link_to 'Back', root_path %>

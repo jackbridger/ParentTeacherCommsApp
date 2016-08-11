@@ -12,7 +12,7 @@ gem 'pg'
 #clipboard
 gem 'zeroclipboard-rails'
 
-
+gem 'jquery-turbolinks'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 

@@ -23,51 +23,175 @@
 <li> Number of logins: <%= @student.sign_in_count %> </li>
 <li> Last logged in: <%= @student.last_sign_in_at %> </li>
 <br>
-<%= link_to('Create Grade', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
+
+
+
 <br>
 <%= link_to "Back", teacher_index_path %>
 <br>
 
-<h2>List of English grades</h2>
 
-<% @all_english_grades.each do |grades| %>
-<h4><%= grades.title %> <%= grades.grade_date %></h4>
 
-     <li>Grade subcategory:
-        <%=grades.subcategory  %>
-    </li>
-         <li>Performance:
-        <%=grades.performance_grade%>
-    </li>
-        <li>Feedback: "<%= grades.feedback  %>"
-    </li>
-<% if @student.last_sign_in_at >= grades.updated_at %>
+
+<% unless @latest_two_english_grade.blank? %>
+<h3>Most recent English grades</h3>
+<% end %>
+
+<% @latest_two_english_grade.each do |grades| %>
+  <div class="card">
+        <div class="card-actions animate">
+      <%= link_to('Edit', edit_english_grade_path(grades)) %> |
+      <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </div>
+    <h1 class="card-header"><%= grades.title %> </h1>
+    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
+    <hr class="card-divider" />
+    <li>Performance: <%=grades.performance_grade  %></li>
+    <li>Feedback: "<%= grades.feedback  %>"</li>
+    <% if grades.performance_grade == 'Not-started' && grades.subcategory == 'Writing' %>
+
+        <% unless @generated_feedback_writing_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_writing_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Writing' %>
+        <% unless @generated_feedback_writing_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_writing_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Writing' %>
+        <% unless @generated_feedback_writing_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_writing_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Writing' %>
+        <% unless @generated_feedback_writing_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_writing_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Not-started' && grades.subcategory == 'Spelling' %>
+        <% unless @generated_feedback_spelling_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_spelling_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Spelling' %>
+        <% unless @generated_feedback_spelling_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_spelling_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Spelling' %>
+        <% unless @generated_feedback_spelling_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_spelling_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Spelling' %>
+        <% unless @generated_feedback_spelling_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_spelling_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Not-started' && grades.subcategory == 'Reading' %>
+        <% unless @generated_feedback_reading_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_reading_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Reading' %>
+        <% unless @generated_feedback_reading_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_reading_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Reading' %>
+        <% unless @generated_feedback_reading_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_reading_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Reading' %>
+        <% unless @generated_feedback_reading_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_reading_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% end %>
+    <% if @student.last_sign_in_at >= grades.updated_at %>
     <li> read</li>
     <% else %>
     <li> unread </li>
 <% end %>
 
-
-    <%= link_to('Edit', edit_english_grade_path(grades)) %> | <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
-<% end %>
-<h2>List of Maths grades</h2>
-
-<% @all_maths_grades.each do |grades| %>
-<h4><%= grades.title %> <%= grades.grade_date %></h4>
-
-     <li>Grade subcategory:
-        <%=grades.subcategory  %>
-    </li>
-         <li>Performance:
-        <%=grades.performance_grade%>
-    </li>
-        <li>Feedback: "<%= grades.feedback  %>"
-    </li>
-
-    <%= link_to('Edit', edit_maths_grade_path(grades)) %> |
-<td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</div>
 <% end %>
 
-<br>
-<br>
+<% unless @latest_two_maths_grade.blank? %>
+<%= link_to('View all English Grades', english_grade_path(:id => @student.id) )  %> 
+<% end %>
+ | <%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
+
+<!-- Maths grades -->
+
+
+<% unless @latest_two_maths_grade.blank? %>
+<h3>Most recent Maths grades</h3>
+<% end %>
+<% @latest_two_maths_grade.each do |grades| %>
+
+
+  <div class="card">
+        <div class="card-actions animate">
+      <%= link_to('Edit', edit_maths_grade_path(grades)) %> |
+      <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </div>
+    <h1 class="card-header"><%= grades.title %> </h1>
+    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
+    <hr class="card-divider" />
+    <li>Performance: <%=grades.performance_grade  %></li>
+    <li>Feedback: "<%= grades.feedback  %>"</li>
+ <% if grades.performance_grade == 'Not-started' && grades.subcategory == 'Number' %>
+
+        <% unless @generated_feedback_number_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_number_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Number' %>
+        <% unless @generated_feedback_number_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_number_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Number' %>
+        <% unless @generated_feedback_number_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_number_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Number' %>
+        <% unless @generated_feedback_number_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_number_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Not-started' && grades.subcategory == 'Measurement' %>
+        <% unless @generated_feedback_measurement_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_measurement_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Measurement' %>
+        <% unless @generated_feedback_measurement_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_measurement_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Measurement' %>
+        <% unless @generated_feedback_measurement_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_measurement_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Measurement' %>
+        <% unless @generated_feedback_measurement_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_measurement_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Not-started' && grades.subcategory == 'Geometry' %>
+        <% unless @generated_feedback_geometry_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_geometry_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Geometry' %>
+        <% unless @generated_feedback_geometry_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_geometry_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Geometry' %>
+        <% unless @generated_feedback_geometry_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_geometry_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Geometry' %>
+        <% unless @generated_feedback_geometry_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_geometry_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% end %>
+    <% if @student.last_sign_in_at >= grades.updated_at %>
+    <li> read</li>
+    <% else %>
+    <li> unread </li>
+<% end %>
+
+  </div>
+<% end %>
+
+<% unless @latest_two_maths_grade.blank? %>
+<%= link_to('View all Maths Grades', maths_grade_path(:id => @student.id) )  %> 
+<% end %>
+|
+<%= link_to('Create Maths Grade', new_maths_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>

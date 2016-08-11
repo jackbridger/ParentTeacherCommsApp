@@ -2,7 +2,7 @@ class EnglishGradesController < ApplicationController
   before_action :set_english_grade, only: [:show, :edit, :update, :destroy]
 before_filter :authenticate_user!
 before_filter do
-    redirect_to new_user_session_path unless current_teacher || current_student
+    redirect_to new_user_session_path unless current_teacher || current_student2
 end
 
 
@@ -15,6 +15,12 @@ end
         @student = Student.find_by_id(@english_grade.student_id)
         @student.id == current_user.id
     end
+
+    def current_student2
+        @student2 = Student.find_by_id(params[:id])
+        @current_student = Student.find_by_id(current_user.id)
+        @student2.id == @current_student.id
+    end
   # GET /english_grades
   # GET /english_grades.json
   def index
@@ -24,6 +30,32 @@ end
   # GET /english_grades/1
   # GET /english_grades/1.json
   def show
+    if current_user.type == 'student'
+      @teacher_other = Teacher.where('email' => current_user.teacher_email).first
+    else
+      @teacher_other = current_user
+    end
+
+    @student = Student.find_by_id(params[:id])
+    @all_english_grades = EnglishGrade.where(:student_id => @student.id).all
+
+#English
+        #Generated feedback - writing
+        @generated_feedback_writing_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Not-started'}).last
+        @generated_feedback_writing_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Working-towards'}).last
+        @generated_feedback_writing_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Working-at'}).last
+        @generated_feedback_writing_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Greater-depth'}).last
+        #Generated feedback - spelling
+        @generated_feedback_spelling_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Not-started'}).last
+        @generated_feedback_spelling_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Working-towards'}).last
+        @generated_feedback_spelling_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Working-at'}).last
+        @generated_feedback_spelling_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Greater-depth'}).last
+        #Generated feedback - reading
+        @generated_feedback_reading_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Not-started'}).last
+        @generated_feedback_reading_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Working-towards'}).last
+        @generated_feedback_reading_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Working-at'}).last
+        @generated_feedback_reading_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Greater-depth'}).last
+
   end
 
   # GET /english_grades/new

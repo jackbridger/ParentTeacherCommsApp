@@ -47,7 +47,7 @@
 
 
 
-<% unless @all_english_grades.blank? %>
+<% unless @latest_two_english_grade.blank? %>
 <h3>Most recent English grades</h3>
 <% end %>
 
@@ -111,14 +111,13 @@
 </div>
 <% end %>
 
-<%= link_to('View all English Grades', new_user_session_path)  %>
 
-
+<%= link_to('View all English Grades', english_grade_path(:id => current_user.id) )  %>
 
 <!-- Maths grades -->
 
 
-<% unless @all_maths_grades.blank? %>
+<% unless @latest_two_maths_grade.blank? %>
 <h3>Most recent Maths grades</h3>
 <% end %>
 <% @latest_two_maths_grade.each do |grades| %>
@@ -184,6 +183,6 @@
 <% end %>
 
 
-<%= link_to('View all Maths Grades', new_user_session_path)  %>
+<%= link_to('View all Maths Grades', maths_grade_path(:id => current_user.id) )  %>
 
 

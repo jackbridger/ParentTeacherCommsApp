@@ -2,7 +2,7 @@ class MathsGradesController < ApplicationController
   before_action :set_maths_grade, only: [:show, :edit, :update, :destroy]
 before_filter :authenticate_user!
 before_filter do
-    redirect_to new_user_session_path unless current_teacher
+    redirect_to new_user_session_path unless current_teacher || current_student2
 end
 
 
@@ -15,15 +15,55 @@ end
         @student = Student.find_by_id(@maths_grade.student_id)
         @student.id == current_user.id
     end
+
+    #checking if it's the current student
+
+    def current_student2
+        @student2 = Student.find_by_id(params[:id])
+        @current_student = Student.find_by_id(current_user.id)
+        @student2.id == @current_student.id
+    end
   # GET /maths_grades
   # GET /maths_grades.json
   def index
-    @maths_grades = MathsGrade.all
+
   end
 
   # GET /maths_grades/1
   # GET /maths_grades/1.json
   def show
+    if current_user.type == 'student'
+      @teacher_other = Teacher.where('email' => current_user.teacher_email).first
+    else
+      @teacher_other = current_user
+    end
+
+
+
+     @student = Student.find_by_id(params[:id])
+    @all_maths_grades = MathsGrade.where(:student_id => @student.id).all
+
+
+    #Maths
+        #Generated feedback - number
+        @generated_feedback_number_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Not-started'}).last
+        @generated_feedback_number_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Working-towards'}).last
+        @generated_feedback_number_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Working-at'}).last
+        @generated_feedback_number_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Greater-depth'}).last
+
+        #Generated feedback - measurement
+        @generated_feedback_measurement_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Not-started'}).last
+        @generated_feedback_measurement_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Working-towards'}).last
+        @generated_feedback_measurement_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Working-at'}).last
+        @generated_feedback_measurement_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Greater-depth'}).last
+
+        #Generated feedback - geometry
+        @generated_feedback_geometry_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Not-started'}).last
+        @generated_feedback_geometry_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Working-towards'}).last
+        @generated_feedback_geometry_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Working-at'}).last
+        @generated_feedback_geometry_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Greater-depth'}).last
+
+
   end
 
   # GET /maths_grades/new

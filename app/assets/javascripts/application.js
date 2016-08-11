@@ -29,7 +29,6 @@ $('#navbar li').click(function() {
 });
 
 
-
 /*
 *******
 TEACHER
@@ -177,3 +176,17 @@ $(document).ready(function() {
 SearchOnList.init($('[data-behaviour=search-on-list]'));
 
 });
+
+
+
+
+
+/*
+*******
+*******
+*******
+ALERTS*
+*******
+*******
+*******
+*/

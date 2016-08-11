@@ -1,39 +1,3 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Maths Grades</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Teacher</th>
-      <th>Student</th>
-      <th>Title</th>
-      <th>Subcategory</th>
-      <th>Performance grade</th>
-      <th>Feedback</th>
-      <th>Grade date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @maths_grades.each do |maths_grade| %>
-      <tr>
-        <td><%= maths_grade.teacher %></td>
-        <td><%= maths_grade.student %></td>
-        <td><%= maths_grade.title %></td>
-        <td><%= maths_grade.subcategory %></td>
-        <td><%= maths_grade.performance_grade %></td>
-        <td><%= maths_grade.feedback %></td>
-        <td><%= maths_grade.grade_date %></td>
-        <td><%= link_to 'Show', maths_grade %></td>
-        <td><%= link_to 'Edit', edit_maths_grade_path(maths_grade) %></td>
-        <td><%= link_to 'Destroy', maths_grade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Maths Grade', new_maths_grade_path %>

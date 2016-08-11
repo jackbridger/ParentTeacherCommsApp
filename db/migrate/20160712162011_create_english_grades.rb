@@ -13,6 +13,7 @@ class CreateEnglishGrades < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+
         add_foreign_key :english_grades, :users, column: :teacher_id
     add_foreign_key :english_grades, :users, column: :student_id
   end

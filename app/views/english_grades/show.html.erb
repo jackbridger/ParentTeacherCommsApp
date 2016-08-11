@@ -1,39 +1,79 @@
-<p id="notice"><%= notice %></p>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
 
-<p>
-  <strong>Teacher:</strong>
-  <%= @english_grade.teacher %>
-</p>
+<% if user_signed_in? %>
+<ul id="navbar">
+    <li class="active"><%=link_to('Home', root_path)%></li>
+    <li><%= link_to('Settings', edit_user_registration_path)  %></li>
+    <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+</ul>
+<% else %>
+<ul id="navbar">
+    <li><%= link_to('Home', root_path)  %></li>
+    <li><%= link_to('Login', new_user_session_path)  %></li>
+</ul>
+<% end %>
+<h1>All English grades </h2>
+<%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
+<% @all_english_grades.each do |grades| %>
+  <div class="card">
+    <h1 class="card-header"><%= grades.title %> </h1>
+    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
+    <hr class="card-divider" />
+    <li>Performance: <%=grades.performance_grade  %></li>
+    <li>Feedback: "<%= grades.feedback  %>"</li>
+    <% if grades.performance_grade == 'Not-started' && grades.subcategory == 'Writing' %>
 
-<p>
-  <strong>Student:</strong>
-  <%= @english_grade.student %>
-</p>
+        <% unless @generated_feedback_writing_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_writing_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Writing' %>
+        <% unless @generated_feedback_writing_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_writing_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Writing' %>
+        <% unless @generated_feedback_writing_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_writing_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Writing' %>
+        <% unless @generated_feedback_writing_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_writing_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Not-started' && grades.subcategory == 'Spelling' %>
+        <% unless @generated_feedback_spelling_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_spelling_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Spelling' %>
+        <% unless @generated_feedback_spelling_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_spelling_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Spelling' %>
+        <% unless @generated_feedback_spelling_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_spelling_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Spelling' %>
+        <% unless @generated_feedback_spelling_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_spelling_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Not-started' && grades.subcategory == 'Reading' %>
+        <% unless @generated_feedback_reading_not_started.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_reading_not_started.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-at' && grades.subcategory == 'Reading' %>
+        <% unless @generated_feedback_reading_working_at.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_reading_working_at.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Working-towards' && grades.subcategory == 'Reading' %>
+        <% unless @generated_feedback_reading_working_towards.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_reading_working_towards.auto_feedback %> </li>
+        <% end -%>
+    <% elsif grades.performance_grade == 'Greater-depth' && grades.subcategory == 'Reading' %>
+        <% unless @generated_feedback_reading_greater_depth.blank? %>
+             <li> Generated feedback:  <%= @generated_feedback_reading_greater_depth.auto_feedback %> </li>
+        <% end -%>
+    <% end %>
+</div>
+<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @english_grade.title %>
-</p>
-
-<p>
-  <strong>Subcategory:</strong>
-  <%= @english_grade.subcategory %>
-</p>
-
-<p>
-  <strong>Performance grade:</strong>
-  <%= @english_grade.performance_grade %>
-</p>
-
-<p>
-  <strong>Feedback:</strong>
-  <%= @english_grade.feedback %>
-</p>
-
-<p>
-  <strong>Grade date:</strong>
-  <%= @english_grade.grade_date %>
-</p>
-
-<%= link_to 'Edit', edit_english_grade_path(@english_grade) %> |
-<%= link_to 'Back', english_grades_path %>
+<%= link_to 'Back', root_path %>
