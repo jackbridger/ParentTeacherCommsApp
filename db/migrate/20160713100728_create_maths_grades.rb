@@ -12,7 +12,7 @@ class CreateMathsGrades < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    change_column :maths_grades, :feedback, :text
+
     add_foreign_key :maths_grades, :users, column: :teacher_id
     add_foreign_key :maths_grades, :users, column: :student_id
   end

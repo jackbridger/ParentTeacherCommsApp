@@ -83,6 +83,8 @@ end
     @student = Student.find_by_id(@english_grade.student_id)
       if @english_grade.save
         UserMailer.new_grade(@student).deliver
+        UserMailer.new_grade(@student).deliver_later(wait_until: @english_grade.grade_date)
+
         redirect_to(student_path(@student), :notice => "Post was successfully created.")
       else
         redirect_to(student_path(@student), :notice => "Post was not created.")
