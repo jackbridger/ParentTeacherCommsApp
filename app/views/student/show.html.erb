@@ -38,10 +38,14 @@
 <% end %>
 
 <% @latest_two_english_grade.each do |grades| %>
+
   <div class="card">
         <div class="card-actions animate">
-      <%= link_to('Edit', edit_english_grade_path(grades)) %> |
+      <% if Time.now < grades.grade_date %> <%= link_to('Edit', edit_english_grade_path(grades)) %> |
       <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% else %>
+      Grade delivered
+      <% end %>
     </div>
     <h1 class="card-header"><%= grades.title %> </h1>
     <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
@@ -98,7 +102,7 @@
              <li> Generated feedback:  <%= @generated_feedback_reading_greater_depth.auto_feedback %> </li>
         <% end -%>
     <% end %>
-    <% if @student.last_sign_in_at >= grades.updated_at %>
+    <% if @student.last_sign_in_at >= grades.grade_date %>
     <li> read</li>
     <% else %>
     <li> unread </li>
@@ -123,8 +127,11 @@
 
   <div class="card">
         <div class="card-actions animate">
-      <%= link_to('Edit', edit_maths_grade_path(grades)) %> |
+      <% if Time.now < grades.grade_date %> <%= link_to('Edit', edit_english_grade_path(grades)) %> |
       <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% else %>
+      Grade delivered
+      <% end %>
     </div>
     <h1 class="card-header"><%= grades.title %> </h1>
     <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
@@ -181,7 +188,7 @@
              <li> Generated feedback:  <%= @generated_feedback_geometry_greater_depth.auto_feedback %> </li>
         <% end -%>
     <% end %>
-    <% if @student.last_sign_in_at >= grades.updated_at %>
+    <% if @student.last_sign_in_at >= grades.grade_date %>
     <li> read</li>
     <% else %>
     <li> unread </li>

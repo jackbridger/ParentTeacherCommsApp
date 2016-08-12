@@ -41,7 +41,7 @@ end
 
 
      @student = Student.find_by_id(params[:id])
-    @all_maths_grades = MathsGrade.where(:student_id => @student.id).all
+    @all_maths_grades = MathsGrade.where(:student_id => @student.id).all.order('grade_date DESC')
 
 
     #Maths

@@ -37,7 +37,7 @@ end
     end
 
     @student = Student.find_by_id(params[:id])
-    @all_english_grades = EnglishGrade.where(:student_id => @student.id).all
+    @all_english_grades = EnglishGrade.where(:student_id => @student.id).all.order('grade_date DESC')
 
 #English
         #Generated feedback - writing

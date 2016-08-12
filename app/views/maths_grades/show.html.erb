@@ -19,7 +19,15 @@
 
 
 <% @all_maths_grades.each do |grades| %>
+
   <div class="card">
+            <div class="card-actions animate">
+      <% if Time.now < grades.grade_date %> <%= link_to('Edit', edit_english_grade_path(grades)) %> |
+      <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% else %>
+      Grade delivered
+      <% end %>
+    </div>
     <h1 class="card-header"><%= grades.title %> </h1>
     <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
     <hr class="card-divider" />
@@ -74,8 +82,16 @@
         <% unless @generated_feedback_geometry_greater_depth.blank? %>
              <li> Generated feedback:  <%= @generated_feedback_geometry_greater_depth.auto_feedback %> </li>
         <% end -%>
+
+
+    <% end %>
+    <% if @student.last_sign_in_at >= grades.grade_date %>
+    <li> read</li>
+    <% else %>
+    <li> unread </li>
     <% end %>
   </div>
+
 <% end %>
 
 <br>
