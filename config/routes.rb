@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :statistics
   resources :shortcut_texts
   resources :tips
   resources :tasks

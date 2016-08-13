@@ -14,6 +14,7 @@ before_filter :authenticate_user!
         #shortcut texts
         @all_shortcut_texts = ShortcutText.where({teacher_id: current_user.id})
 
+        @students = User.all
 
 
     end

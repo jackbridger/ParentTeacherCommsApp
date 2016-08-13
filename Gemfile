@@ -13,6 +13,10 @@ gem 'delayed_job'
 gem 'delayed_job_active_record'
 
 
+#charts
+gem 'chartkick'
+gem 'highcharts-rails'
+
 #clipboard
 gem 'zeroclipboard-rails'
 

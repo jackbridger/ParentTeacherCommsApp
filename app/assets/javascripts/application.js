@@ -17,6 +17,9 @@
 //= require bootstrap-sprockets
 //= require_tree .
 //= require zeroclipboard
+
+//= require highcharts
+//= require chartkick
  /*
   **********************************************************
   * OPAQUE NAVBAR SCRIPT
