@@ -27,3 +27,8 @@ User.create(first_name: 'Zoe', last_name: 'Foley', email: 'zoe@gmail.com', type:
 Task.create(subject: 'English', task: 'Learn ten new adjectives', due_date: '2016-09-14', :teacher_id: 6)
 Task.create(subject: 'Maths', task: 'Learn 7 times table', due_date: '2016-09-14', :teacher_id: 6)
 Task.create(subject: 'English', task: 'Read Harry Potter and the Philosopher\'s stone' , due_date: '2016-09-14', :teacher_id: 6)
+
+
+EnglishGrade.create(teacher_id: 6, title: '')
+
+<EnglishGrade id: 11, teacher_id: 1, student_id: 3, title: "ff", subcategory: "Spelling", performance_grade: "Not-started", feedback: "", grade_date: "2016-08-02 00:00:00", created_at: "2016-08-02 16:02:56", updated_at: "2016-08-02 16:02:56">, ...]>
