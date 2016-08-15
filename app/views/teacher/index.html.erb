@@ -23,13 +23,12 @@
   <h1> <%= current_user.first_name %> <%= current_user.last_name %> (Teacher) </h1>
 
 
-
 <div class = "row">
-
-<div class = "col-md-8">
-
-  <div class = "col-md-2">
-    <div class="container" data-behaviour="search-on-list">
+  <!--The left hand side -->
+<div class = "col-md-4">
+  <!-- top left -->
+  <div class ="row">
+        <div class="container" data-behaviour="search-on-list">
       <input type="text" class="input-query" data-search-on-list="search" placeholder="Search name or last name..."/>
 
       <div class="list-wrap">
@@ -43,48 +42,48 @@
       </div>
     </div>
   </div>
-    <div class = "col-md-6">
-
-  </div>
-</div>
-
-  <div class = "col-md-4">
-    <h3>Tasks</h3>
-    <%= link_to('New task', new_task_path(:teacher_id => @teacher.id))  %>
-    <br>
-    <% @all_tasks.each do |task| %>
-    <li>
-        <p><b> <%= task.task %> -  </b><%= task.subject %> - due: <%= task.due_date%>  <%= link_to('Edit', edit_task_path(task))  %> | <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td> </p>
-    </li>
-    <% end %>
-
-  <!-- List of the students -->
-
-
-    <%= link_to('Auto feedbacks', edit_auto_gens_path)  %>
-
-
-
-    <h3>Shortcut text</h3>
-    <%= link_to('New Shortcut text', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
-    <br>
-    <% @all_shortcut_texts.each do |shortcut| %>
-    <li>
-        <p><b> <%= shortcut.body %> -  </b>  </p> <%= link_to('Edit', edit_shortcut_text_path(shortcut))  %> | <td><%= link_to 'Delete', shortcut, method: :delete, data: { confirm: 'Are you sure?' } %></td> </p>
-    </li>
-    <% end %>
-  </div>
-</div>
-
-<div class ="row">
-  <div class = "col-md-8">
+  <!-- second left -->
+  <div class ="row">
     <div class = "container1">
     <%= students_by_logins %>
   </div>
+  </div>
+</div>
 
-  </div>
-  <div class = "col-md-4">
-  </div>
+  <!--Middle section - empty -->
+<div class = "col-md-4">
+</div>
+
+<!-- Right hand side -->
+<div class = "col-md-4">
+       <!-- Right Hand Side - Second row -->
+      <div class = "row">
+     <h3>Tasks</h3>
+      <%= link_to('New task', new_task_path(:teacher_id => @teacher.id))  %>
+      <br>
+      <% @all_tasks.each do |task| %>
+      <li>
+          <p><b> <%= task.task %> -  </b><%= task.subject %> - due: <%= task.due_date%>  <%= link_to('Edit', edit_task_path(task))  %> | <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td> </p>
+      </li>
+      <% end %>
+
+      <%= link_to('Auto feedbacks', edit_auto_gens_path)  %>
+    </div>
+
+<!-- Right Hand Side - Second row -->
+    <div class = "row">
+      <h3>Shortcut text</h3>
+      <%= link_to('New Shortcut text', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
+      <br>
+      <% @all_shortcut_texts.each do |shortcut| %>
+      <li>
+          <p><b> <%= shortcut.body %> -  </b>  </p> <%= link_to('Edit', edit_shortcut_text_path(shortcut))  %> | <td><%= link_to 'Delete', shortcut, method: :delete, data: { confirm: 'Are you sure?' } %></td> </p>
+      </li>
+      <% end %>
+    </div>
+</div>
 
 </div>
+
+
 </body>
