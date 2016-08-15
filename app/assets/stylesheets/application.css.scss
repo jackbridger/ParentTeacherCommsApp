@@ -302,7 +302,7 @@ $dark-grey: darken($grey, 10%);
 
 
 @mixin center {
-
+  position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   margin: auto;
 }
@@ -315,7 +315,6 @@ $dark-grey: darken($grey, 10%);
 
 .container {
   @include center;
-  position: relative;
   width: 300px;
   height: 300px;
   background: $grey;
@@ -323,7 +322,7 @@ $dark-grey: darken($grey, 10%);
   border: 1px solid $dark-grey;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 5px 10px rgba(0,0,0,0.05);;
   border-radius: 3px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .input-query {
