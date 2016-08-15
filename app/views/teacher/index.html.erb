@@ -19,7 +19,7 @@
 </ul>
 <% end %>
 
-
+<body>
   <h1> <%= current_user.first_name %> <%= current_user.last_name %> (Teacher) </h1>
 
 
@@ -27,7 +27,24 @@
 <div class = "row">
 
 <div class = "col-md-8">
+  <div class = "col-md-4">
     <%= students_by_logins %>
+  </div>
+  <div class = "col-md-4">
+    <div class="container" data-behaviour="search-on-list">
+      <input type="text" class="input-query" data-search-on-list="search" placeholder="Search name or last name..."/>
+
+      <div class="list-wrap">
+      <ul class="list" data-search-on-list="list">
+        <% @all_students.each do |student| %>
+        <li class="list-item" data-search-on-list="list-item">
+          <a href="../student/<%= student.id%>" class="list-item-link"> <%= student.first_name %> <span class="item-list-subtext"><%= student.last_name %></span></a>
+        </li>
+    <% end %>
+      </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
   <div class = "col-md-4">
@@ -57,28 +74,15 @@
     <% end %>
   </div>
 </div>
+
 <div class ="row">
   <div class = "col-md-8">
-        <div class = "col-md-8">
     <!-- Search bar -->
-    <div class="container" data-behaviour="search-on-list">
-      <input type="text" class="input-query" data-search-on-list="search" placeholder="Search name or last name..."/>
 
-      <div class="list-wrap">
-      <ul class="list" data-search-on-list="list">
-        <% @all_students.each do |student| %>
-        <li class="list-item" data-search-on-list="list-item">
-          <a href="../student/<%= student.id%>" class="list-item-link"> <%= student.first_name %> <span class="item-list-subtext"><%= student.last_name %></span></a>
-        </li>
-    <% end %>
-      </ul>
-      </div>
-    </div>
-  </div>
 
   </div>
   <div class = "col-md-4">
   </div>
 
 </div>
-
+</body>
