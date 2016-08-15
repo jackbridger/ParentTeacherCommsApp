@@ -26,38 +26,32 @@ class ShortcutTextsController < ApplicationController
   def create
     @shortcut_text = ShortcutText.new(shortcut_text_params)
 
-    respond_to do |format|
-      if @shortcut_text.save
-        format.html { redirect_to @shortcut_text, notice: 'Shortcut text was successfully created.' }
-        format.json { render :show, status: :created, location: @shortcut_text }
-      else
-        format.html { render :new }
-        format.json { render json: @shortcut_text.errors, status: :unprocessable_entity }
-      end
+    if @shortcut_text.save
+      redirect_to(root_path, :notice => "Shortcut text was successfully created.")
+    else
+      redirect_to(root_path, :notice => "Shortcut text was not successfully created.")
     end
+
   end
 
   # PATCH/PUT /shortcut_texts/1
   # PATCH/PUT /shortcut_texts/1.json
   def update
-    respond_to do |format|
-      if @shortcut_text.update(shortcut_text_params)
-        format.html { redirect_to @shortcut_text, notice: 'Shortcut text was successfully updated.' }
-        format.json { render :show, status: :ok, location: @shortcut_text }
-      else
-        format.html { render :edit }
-        format.json { render json: @shortcut_text.errors, status: :unprocessable_entity }
-      end
+    if @shortcut_text.update(shortcut_text_params)
+      redirect_to(root_path, :notice => "Shortcut text was successfully updated.")
+    else
+      redirect_to(root_path, :notice => "Shortcut text was not successfully updated.")
     end
   end
 
   # DELETE /shortcut_texts/1
   # DELETE /shortcut_texts/1.json
   def destroy
-    @shortcut_text.destroy
-    respond_to do |format|
-      format.html { redirect_to shortcut_texts_url, notice: 'Shortcut text was successfully destroyed.' }
-      format.json { head :no_content }
+    if @shortcut_text.destroy
+       redirect_to(root_path, :notice => "Shortcut textwas successfully deleted.")
+    else
+        redirect_to(root_path, :notice => "Shortcut text was successfully deleted.")
+
     end
   end
 
