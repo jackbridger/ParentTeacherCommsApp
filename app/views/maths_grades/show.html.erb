@@ -22,9 +22,9 @@
 
   <div class="card">
             <div class="card-actions animate">
-      <% if Time.now < grades.grade_date %> <%= link_to('Edit', edit_english_grade_path(grades)) %> |
+      <% if Time.zone.now < grades.grade_date && current_user.type == 'teacher' %> <%= link_to('Edit', edit_english_grade_path(grades)) %> |
       <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% else %>
+      <% elsif current_user.type == 'teacher' %>
       Grade delivered
       <% end %>
     </div>
