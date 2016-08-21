@@ -1,7 +1,32 @@
 
 
-<%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => @teacher.id))  %>
 
-<%= link_to('Create Maths Grade', new_maths_grade_path(:student_id => @student.id, :teacher_id => @teacher.id))  %>
+<% if params[:grade_type] == 'English' %>
+<h1>English </h1>
+<%= form_tag choose_subjects_path, :method => 'get' do %>
+<%= text_field_tag :title, 'Title' %><br>
+  <%= select_tag :subcategory, options_for_select(%w[Spelling Reading Writing]) %> <br>
+  <%= datetime_field_tag :grade_date %> <br>
+  <%= hidden_field_tag :batch_grade => true %>
+  <%= (submit_tag 'Save') %>
+<% end %>
+<% end %>
 
-<%= link_to 'Back', student_path(:id => @student.id) %>
+
+
+<% if params[:grade_type] == 'Maths' %>
+<h1>Maths </h1>
+<%= form_tag choose_subjects_path, :method => 'get' do %>
+<%= text_field_tag :title, 'Title' %><br>
+  <%= select_tag :subcategory, options_for_select(%w[Number Measurement To-update]) %> <br>
+  <%= datetime_field_tag :grade_date %> <br>
+  <%= hidden_field_tag :batch_grade => true %>
+  <%= (submit_tag 'Save') %>
+<% end %>
+<% end %>
+
+
+
+
+
+<%= link_to 'Back', root_path %>

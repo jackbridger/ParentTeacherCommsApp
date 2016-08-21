@@ -1,5 +1,11 @@
 <head>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<style>
+  body {
+    padding-top: -50px;
+  }
+</style>
+
 </head>
 
 <% if user_signed_in? %>
@@ -15,6 +21,7 @@
 </ul>
 <% end %>
 <h1>All English grades </h2>
+<%= link_to 'Back', root_path %>
 <% if current_user.type == 'teacher' %>
   <%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
 <% end %>
@@ -90,4 +97,4 @@
 </div>
 <% end %>
 
-<%= link_to 'Back', root_path %>
+

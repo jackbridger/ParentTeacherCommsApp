@@ -1,5 +1,11 @@
 <head>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<style>
+  body {
+    padding-top: -50px;
+  }
+</style>
+
 </head>
 
 <% if user_signed_in? %>
@@ -15,7 +21,7 @@
 </ul>
 <% end %>
 <h1>All maths grades </h2>
-
+<%= link_to 'Back', root_path %>
 
 
 <% @all_maths_grades.each do |grades| %>
@@ -97,4 +103,4 @@
 <br>
 
 
-<%= link_to 'Back', root_path %>
+

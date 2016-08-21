@@ -67,19 +67,24 @@
       </li>
       <% end %>
 
-      <%= link_to('Auto feedbacks', edit_auto_gens_path)  %>
+
     </div>
 
 <!-- Right Hand Side - Second row -->
     <div class = "row">
       <h3>Shortcut text</h3>
-      <%= link_to('New Shortcut text', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
+      <%= link_to('Auto feedbacks', edit_auto_gens_path)  %>
+      <br>
+      <%= link_to('New general feedbacks', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
       <br>
       <% @all_shortcut_texts.each do |shortcut| %>
       <li>
           <p><b> <%= shortcut.body %> -  </b>  </p> <%= link_to('Edit', edit_shortcut_text_path(shortcut))  %> | <td><%= link_to 'Delete', shortcut, method: :delete, data: { confirm: 'Are you sure?' } %></td> </p>
       </li>
       <% end %>
+      <h3>Batch grades</h3>
+    <%= link_to('Batch English grades', choose_subjects_path(:grade_type => 'English'))  %> <br>
+    <%= link_to('Batch Maths grades', choose_subjects_path(:grade_type => 'Maths'))  %>
     </div>
 </div>
 

@@ -68,6 +68,13 @@ end
     @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
 
     @all_shortcut_texts = ShortcutText.where(:teacher_id => current_user.id).all
+
+
+#batch creation
+  @all_students = User.where(:teacher_email => current_user.email)
+  @number_of_students = @all_students.count
+  @batch_process = params[:batch_process]
+
   end
 
   # GET /english_grades/1/edit
