@@ -68,14 +68,15 @@ end
 
   # GET /maths_grades/new
   def new
-    @maths_grade = MathsGrade.new
-    @maths_grade.teacher_id = current_user.id
-    @student = Student.find(params[:student_id])
-    @maths_grade.student_id = @student.id
 
+      @maths_grade = MathsGrade.new
+      @maths_grade.teacher_id = current_user.id
+      @student = Student.find(params[:student_id])
+      @maths_grade.student_id = @student.id
+
+      @all_shortcut_texts = ShortcutText.where(:teacher_id => current_user.id).all
     @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
 
-    @all_shortcut_texts = ShortcutText.where(:teacher_id => current_user.id).all
   end
 
   # GET /maths_grades/1/edit

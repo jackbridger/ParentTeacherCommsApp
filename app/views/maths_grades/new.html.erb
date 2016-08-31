@@ -18,9 +18,48 @@
 
 <h1>New Maths Grade</h1>
 
-<%= render 'form', maths_grade: @maths_grade %>
+<% if @batch_process == 'true' %>
+          <% @all_students.each do |student| %>
+              <%= render '_form', @batch_of_grades %>
+            <% end %>
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if @batch_process != 'true' %>
+
+  <%= render 'form', maths_grade: @maths_grade %>
+
+
 
 <%= link_to 'Back', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id) %>
+
 
 <div type = 'teacher_tips'>
 
@@ -45,3 +84,4 @@
     $('.copy_to_clipboard').copyToClipBoard();
   });
  </script>
+<% end %>

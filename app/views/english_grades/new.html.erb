@@ -32,11 +32,55 @@
 
 </div>
 
+<h3>Specified shortcuts </h3>
+
+<div id="wrapper">
+<div id = "Spelling">
+
+<span id="Not-started">not started</span>
+<span id="Working-towards">Working Towards</span>
+<span id="Working-at">Working At</span>
+<span id="Greater-depth">Greater Depth</span>
+</div>
+<div id = "Writing">
+  <!-- add in all the additionals here: -->
+    <% unless @generated_feedback_writing_not_started.blank? %>
+   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_writing_not_started.auto_feedback %> " > <p> <%= @generated_feedback_writing_not_started.auto_feedback %> </p> </button>
+   <% end %>
+<span id="Not-started">not started</span>
+<span id="Working-towards">Working Towards</span>
+<span id="Working-at">Working At</span>
+<span id="Greater-depth">Greater Depth</span>
+</div>
+<div id = "Reading">
+Reading
+<span id="Not-started">not started</span>
+<span id="Working-towards">Working Towards</span>
+<span id="Working-at">Working At</span>
+<span id="Greater-depth">Greater Depth</span>
+</div>
+</div>
+
 <h3>Select shortcuts </h3>
 
   <% (@all_shortcut_texts).each do |n| %>
    <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.body %>" > <p> <%= n.body %></p> </button>
   <% end %>
+
+<script>
+$('#english_grade_subcategory').change(function () {
+  $('#wrapper > div, #wrapper span ').css("display","none");
+  console.log($(this).val());
+  var fieldToShow = $(this).val();
+  $("#" + fieldToShow).css("display","block");
+});
+$('#english_grade_performance_grade').change(function () {
+  $('#wrapper span').css("display","none");
+  console.log($(this).val());
+  var fieldToShow = $(this).val();
+  $("#" + fieldToShow).css("display","block");
+});
+</script>
 
 
 <script>

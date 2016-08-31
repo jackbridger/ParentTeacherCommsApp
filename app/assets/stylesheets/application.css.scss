@@ -406,11 +406,21 @@ line-height: 0;
 *******
 *******
 *******
-POP UP*
+Option selecting*
 *******
 *******
 *******
 */
+
+#wrapper span{display: none}
+#Spelling,
+#Writing,
+#Reading
+{
+    display: none;
+}
+
+
 
 
 

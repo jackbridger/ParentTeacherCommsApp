@@ -60,20 +60,38 @@ end
 
   # GET /english_grades/new
   def new
-    @english_grade = EnglishGrade.new
-    @english_grade.teacher_id = current_user.id
-    @student = Student.find(params[:student_id])
-    @english_grade.student_id = @student.id
-
-    @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
-
-    @all_shortcut_texts = ShortcutText.where(:teacher_id => current_user.id).all
 
 
-#batch creation
-  @all_students = User.where(:teacher_email => current_user.email)
-  @number_of_students = @all_students.count
-  @batch_process = params[:batch_process]
+        #English
+        #Generated feedback - writing
+        @generated_feedback_writing_not_started = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Not-started'}).last
+        @generated_feedback_writing_working_towards = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Working-towards'}).last
+        @generated_feedback_writing_working_at = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Working-at'}).last
+        @generated_feedback_writing_greater_depth = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Writing', performance_grade: 'Greater-depth'}).last
+        #Generated feedback - spelling
+        @generated_feedback_spelling_not_started = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Not-started'}).last
+        @generated_feedback_spelling_working_towards = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Working-towards'}).last
+        @generated_feedback_spelling_working_at = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Working-at'}).last
+        @generated_feedback_spelling_greater_depth = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Spelling', performance_grade: 'Greater-depth'}).last
+        #Generated feedback - reading
+        @generated_feedback_reading_not_started = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Not-started'}).last
+        @generated_feedback_reading_working_towards = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Working-towards'}).last
+        @generated_feedback_reading_working_at = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Working-at'}).last
+        @generated_feedback_reading_greater_depth = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'English', subcategory: 'Reading', performance_grade: 'Greater-depth'}).last
+
+      #single stuff
+      @english_grade = EnglishGrade.new
+      @english_grade.teacher_id = current_user.id
+      @student = Student.find(params[:student_id])
+      @english_grade.student_id = @student.id
+
+      @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
+
+      @all_shortcut_texts = ShortcutText.where(:teacher_id => current_user.id).all
+
+
+
+
 
   end
 

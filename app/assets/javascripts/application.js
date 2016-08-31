@@ -190,9 +190,10 @@ SearchOnList.init($('[data-behaviour=search-on-list]'));
 *******
 *******
 *******
-POP UP*
+Selection of values*
 *******
 *******
 *******
 */
+
 

@@ -7,7 +7,7 @@
 <%= text_field_tag :title, 'Title' %><br>
   <%= select_tag :subcategory, options_for_select(%w[Spelling Reading Writing]) %> <br>
   <%= datetime_field_tag :grade_date %> <br>
-  <%= hidden_field_tag :batch_grade => true %>
+  <%= text_field_tag :batch_process, 'true' %><br>
   <%= (submit_tag 'Save') %>
 <% end %>
 <% end %>
@@ -16,11 +16,11 @@
 
 <% if params[:grade_type] == 'Maths' %>
 <h1>Maths </h1>
-<%= form_tag choose_subjects_path, :method => 'get' do %>
+<%= form_tag new_maths_grade_path, :method => 'get' do %>
 <%= text_field_tag :title, 'Title' %><br>
   <%= select_tag :subcategory, options_for_select(%w[Number Measurement To-update]) %> <br>
   <%= datetime_field_tag :grade_date %> <br>
-  <%= hidden_field_tag :batch_grade => true %>
+  <%= text_field_tag :batch_process, 'true' %><br>
   <%= (submit_tag 'Save') %>
 <% end %>
 <% end %>
