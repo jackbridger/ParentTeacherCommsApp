@@ -34,7 +34,7 @@
 
 <h3>Specified shortcuts </h3>
 
-<div id="wrapper">
+<div id="shortcut_wrapper">
 <div id = "Spelling">
 
 <span id="Not-started">not started</span>
@@ -69,13 +69,13 @@ Reading
 
 <script>
 $('#english_grade_subcategory').change(function () {
-  $('#wrapper > div, #wrapper span ').css("display","none");
+  $('#shortcut_wrapper > div, #shortcut_wrapper span ').css("display","none");
   console.log($(this).val());
   var fieldToShow = $(this).val();
   $("#" + fieldToShow).css("display","block");
 });
 $('#english_grade_performance_grade').change(function () {
-  $('#wrapper span').css("display","none");
+  $('#shortcut_wrapper span').css("display","none");
   console.log($(this).val());
   var fieldToShow = $(this).val();
   $("#" + fieldToShow).css("display","block");
