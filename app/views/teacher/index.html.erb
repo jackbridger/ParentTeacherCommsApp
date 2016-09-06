@@ -51,11 +51,11 @@
 </div>
 
   <!--Middle section - empty -->
-<div class = "col-md-4">
+<div class = "col-md-2">
 </div>
 
 <!-- Right hand side -->
-<div class = "col-md-4">
+<div class = "col-md-5">
        <!-- Right Hand Side - Second row -->
       <div class = "row">
      <h3>Tasks</h3>
@@ -82,13 +82,12 @@
           <p><b> <%= shortcut.body %> -  </b>  </p> <%= link_to('Edit', edit_shortcut_text_path(shortcut))  %> | <td><%= link_to 'Delete', shortcut, method: :delete, data: { confirm: 'Are you sure?' } %></td> </p>
       </li>
       <% end %>
-      <h3>Batch grades</h3>
-    <%= link_to('Batch English grades', choose_subjects_path(:grade_type => 'English'))  %> <br>
-    <%= link_to('Batch Maths grades', choose_subjects_path(:grade_type => 'Maths'))  %>
     </div>
 </div>
 
 </div>
-
+<!-- Right hand margin -->
+<div class = "col-md-1">
+</div>
 
 </body>

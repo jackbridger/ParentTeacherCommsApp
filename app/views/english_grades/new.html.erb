@@ -34,31 +34,35 @@
 
 <h3>Specified shortcuts </h3>
 
-<div id="shortcut_wrapper">
-<div id = "Spelling">
+<div id="wrapper">
+  <span id = "Spelling">
 
-<span id="Not-started">not started</span>
-<span id="Working-towards">Working Towards</span>
-<span id="Working-at">Working At</span>
-<span id="Greater-depth">Greater Depth</span>
-</div>
-<div id = "Writing">
-  <!-- add in all the additionals here: -->
-    <% unless @generated_feedback_writing_not_started.blank? %>
-   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_writing_not_started.auto_feedback %> " > <p> <%= @generated_feedback_writing_not_started.auto_feedback %> </p> </button>
-   <% end %>
-<span id="Not-started">not started</span>
-<span id="Working-towards">Working Towards</span>
-<span id="Working-at">Working At</span>
-<span id="Greater-depth">Greater Depth</span>
-</div>
-<div id = "Reading">
-Reading
-<span id="Not-started">not started</span>
-<span id="Working-towards">Working Towards</span>
-<span id="Working-at">Working At</span>
-<span id="Greater-depth">Greater Depth</span>
-</div>
+  <% unless @generated_feedback_spelling_not_started.blank? %>
+  Not started
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_not_started.auto_feedback %>" > <p> <%= @generated_feedback_spelling_not_started.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_spelling_working_towards.blank? %>
+    Working-towards
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_spelling_working_towards.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_spelling_working_at.blank? %>
+    Working-at
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_working_at.auto_feedback %>" > <p> <%= @generated_feedback_spelling_working_at.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_spelling_greater_depth.blank? %>
+    Greater-depth
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_spelling_greater_depth.auto_feedback %></p> </button>
+  <% end %>
+
+  </span>
+
+
+<span id = "Writing">Writing</span>
+<span id = "Reading">Reading </span>
+
 </div>
 
 <h3>Select shortcuts </h3>
@@ -69,16 +73,16 @@ Reading
 
 <script>
 $('#english_grade_subcategory').change(function () {
-  $('#shortcut_wrapper > div, #shortcut_wrapper span ').css("display","none");
+  $('#Spelling, #Writing, #Reading').css("display","none");
   console.log($(this).val());
   var fieldToShow = $(this).val();
-  $("#" + fieldToShow).css("display","block");
+  $("#" + fieldToShow).css("display","inline-block");
 });
 $('#english_grade_performance_grade').change(function () {
-  $('#shortcut_wrapper span').css("display","none");
+  $('#Not-started, #Working-towards, #Working-at, #Greater-depth').css("display","none");
   console.log($(this).val());
   var fieldToShow = $(this).val();
-  $("#" + fieldToShow).css("display","block");
+  $("#" + fieldToShow).css("display","inline-block");
 });
 </script>
 
