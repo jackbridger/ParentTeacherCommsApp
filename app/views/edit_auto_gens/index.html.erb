@@ -1,4 +1,16 @@
 <h1>Auto feedback</h1>
+<% if user_signed_in? %>
+<ul id="navbar">
+    <li class="active"><%= link_to('Home', root_path)  %></li>
+    <li><%= link_to('Settings', edit_user_registration_path)  %></li>
+    <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+</ul>
+<% else %>
+<ul id="navbar">
+    <li><%= link_to('Home', root_path)  %></li>
+    <li><%= link_to('Login', new_user_session_path)  %></li>
+</ul>
+<% end %>
 <%= link_to('Back', teacher_index_path)  %>
 <h3>English</h3>
 <h4>Spelling</h4>

@@ -38,22 +38,22 @@
   <span id = "Spelling">
 
   <% unless @generated_feedback_spelling_not_started.blank? %>
-  Not started
+  <b>Not started</b>
       <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_not_started.auto_feedback %>" > <p> <%= @generated_feedback_spelling_not_started.auto_feedback %></p> </button>
   <% end %>
 
     <% unless @generated_feedback_spelling_working_towards.blank? %>
-    Working-towards
+    <b>Working-towards</b>
       <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_spelling_working_towards.auto_feedback %></p> </button>
   <% end %>
 
     <% unless @generated_feedback_spelling_working_at.blank? %>
-    Working-at
+    <b>Working-at</b>
       <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_working_at.auto_feedback %>" > <p> <%= @generated_feedback_spelling_working_at.auto_feedback %></p> </button>
   <% end %>
 
     <% unless @generated_feedback_spelling_greater_depth.blank? %>
-    Greater-depth
+    <b>Greater-depth</b>
       <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_spelling_greater_depth.auto_feedback %></p> </button>
   <% end %>
 

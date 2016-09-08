@@ -73,9 +73,9 @@
 <!-- Right Hand Side - Second row -->
     <div class = "row">
       <h3>Shortcut text</h3>
-      <%= link_to('Auto feedbacks', edit_auto_gens_path)  %>
+      <%= link_to('Subject specific shortcuts', edit_auto_gens_path)  %>
       <br>
-      <%= link_to('New general feedbacks', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
+      <%= link_to('New general shortcut text', new_shortcut_text_path(:teacher_id => @teacher.id))  %>
       <br>
       <% @all_shortcut_texts.each do |shortcut| %>
       <li>
