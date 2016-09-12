@@ -137,12 +137,18 @@ a:hover {background-color:transparent;}  /* mouse over link */
 a:active {background-color:transparent;}  /* selected link */
 
 a {color: steelblue;}      /* unvisited link */
-a:visited {color: steelblue;}  /* visited link */
+a:visited {color: steelblue;}
+
 a:hover {color: steelblue;}  /* mouse over link */
 a:active {color: steelblue;}  /* selected link */
 
 
+.buttonscolour {
 
+
+a{color: white;}
+
+}
 
 
 
@@ -419,6 +425,16 @@ Option selecting*
 {
     display: none;
 }
+
+
+
+/* Profile page */
+
+
+
+
+
+
 
 
 
