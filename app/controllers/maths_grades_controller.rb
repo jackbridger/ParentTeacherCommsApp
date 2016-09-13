@@ -93,7 +93,7 @@ end
     @maths_grade = MathsGrade.new(maths_grade_params)
     @student = Student.find_by_id(@maths_grade.student_id)
     if @maths_grade.save
-      UserMailer.new_grade(@student).deliver_later(wait_until: @maths_grade.grade_date)
+      UserMailer.new_grade(@student).deliver_later(wait_until: @maths_grade.grade_date.to_time)
       redirect_to(student_path(@student), :notice => "Post was successfully created.")
     else
       redirect_to(student_path(@student), :notice => "Post was successfully created.")
