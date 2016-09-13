@@ -3,13 +3,43 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <meta name="turbolinks-cache-control" content="no-cache">
 
+<style>
+body {
+   background: url(https://photos-6.dropbox.com/t/2/AABO-zyEY2tOjMWLE104A8VUTNP-OKx3304nOyxkkd4SUA/12/232060938/jpeg/32x32/1/_/1/2/2015-09-Life-of-Pix-free-stock-photos-road-desert-bus-fresonneveld.jpg/EMGkycQBGNe4AiAHKAc/1FCxtUYuYCMA_UVWkGTRrrdc-EXOXR8d4yf0iBn_sZg?dl=0&size=2048x1536&size_mode=3);
+
+
+}
+
+h2 {
+  color:white;
+}
+
+.gen_shortcuts {
+    width:500px;
+    height:100px;
+    background-color:white;
+    z-index:0;
+    opacity:0.5;
+}
+
+
+#tasktitle {
+  margin: 15px;
+}
+#shortcuts{
+  margin: 4px;
+}
+</style>
+
+
+
 <!-- <script src="http://code.highcharts.com/highcharts.js"></script> -->
 </head>
 <% content_for :title, "Home" %>
 
 <% if user_signed_in? %>
 <ul id="navbar">
-    <li class="active"><%= link_to('Sarah Cornish (Teacher)', root_path)  %></li>
+    <li class="active"><%= link_to("#{current_user.first_name} #{current_user.last_name} (Teacher)" , root_path)  %></li>
     <li><%= link_to('Settings', edit_user_registration_path)  %></li>
     <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
 </ul>
@@ -26,48 +56,16 @@
 
 <div class = "row">
   <!--The left hand side -->
+
 <div class = "col-md-4">
-  <!-- top left -->
-  <div class ="row">
-    <h2>Student list</h3>
-        <div class="container" data-behaviour="search-on-list">
-      <input type="text" class="input-query" data-search-on-list="search" placeholder="Search name or last name..."/>
-
-      <div class="list-wrap">
-        <ul class="list" data-search-on-list="list">
-          <% @all_students.each do |student| %>
-            <li class="list-item" data-search-on-list="list-item">
-              <a href="../student/<%= student.id%>" class="list-item-link">
-                  <%= student.first_name %> <span class="item-list-subtext"><%= student.last_name %></span>
-              </a>
-            </li>
-         <% end %>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-  <!-- second left -->
-  <div class ="row">
-    <div class = "container1">
-      <h2>Parental login statistics </h2>
-    <%= students_by_logins %>
-  </div>
-  </div>
-</div>
-
-  <!--Middle section - empty -->
-<div class = "col-md-2">
-</div>
-
-<!-- Right hand side -->
-<div class = "col-md-5">
-       <!-- Right Hand Side - Second row -->
-      <div class = "row">
+ <div class = "row">
+    <div id = "tasktitle">
      <h2>Tasks</h2>
-
+          <div class = "buttonscolour">
+            <%= link_to "New", new_task_path(:teacher_id => @teacher.id), :class => "btn btn-primary" %>
+    </div>
+          </div>
       <% @all_tasks.each do |task| %>
-
         <div class="card">
           <div class="card-actions animate">
             <%= link_to('Edit', edit_task_path(task)) %> |
@@ -79,29 +77,84 @@
         <h3> <%= task.task %> </h3>
       </div>
     <% end %>
-          <div class = "buttonscolour">
-            <%= link_to "New", new_task_path(:teacher_id => @teacher.id), :class => "btn btn-primary" %>
-          </div>
+
     </div>
 
 <!-- Right Hand Side - Second row -->
-    <div class = "row">
+    <div class = "row" id = "shortcuts">
       <h2>Shortcut text</h2>
       <div class = "buttonscolour">
-        <%= link_to "Subject shortcuts", edit_auto_gens_path, :class => "btn btn-primary" %>
+        <%= link_to "View/Edit", edit_auto_gens_path, :class => "btn btn-primary" %>
       </div>
       <br>
       <h2>General shortcuts </h2>
-
-      <% @all_shortcut_texts.each do |shortcut| %>
-      <h3>
-          <%= shortcut.body %> <br> <%= link_to('Edit', edit_shortcut_text_path(shortcut))  %> | <td><%= link_to 'Delete', shortcut, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </h3>
-      <% end %>
       <div class = "buttonscolour">
           <%= link_to "New", new_shortcut_text_path(:teacher_id => @teacher.id), :class => "btn btn-primary" %>
       </div>
+      <% @all_shortcut_texts.each do |shortcut| %>
+      <div class = "gen_shortcuts"</div>
+        <h3>
+            <%= shortcut.body %> <br> <%= link_to('Edit', edit_shortcut_text_path(shortcut))  %> | <td><%= link_to 'Delete', shortcut, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </h3>
+      </div>
+      <% end %>
+
     </div>
+
+</div>
+
+  <!--Middle section - empty -->
+<div class = "col-md-2">
+</div>
+
+<!-- Right hand side -->
+<div class = "col-md-5">
+       <!-- Right Hand Side - Second row -->
+
+  <!-- top left -->
+  <div class ="row">
+      <div class = "container1">
+            <div class = "searchboxteacher">
+      <div class="container" data-behaviour="search-on-list">
+          <input type="text" class="input-query" data-search-on-list="search" placeholder="Find student"/>
+
+          <div class="list-wrap">
+            <ul class="list" data-search-on-list="list">
+              <% @all_students.each do |student| %>
+                <li class="list-item" data-search-on-list="list-item">
+                  <a href="../student/<%= student.id%>" class="list-item-link">
+                      <%= student.first_name %> <span class="item-list-subtext"><%= student.last_name %></span>
+                  </a>
+                </li>
+             <% end %>
+            </ul>
+          </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+  <div class = "row"> </div>
+  <!-- second left -->
+  <div class ="row">
+
+        <h2>Parental login statistics </h2>
+      <%= students_by_logins %>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 </div>

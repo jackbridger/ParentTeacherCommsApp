@@ -39,7 +39,11 @@
     <hr class="card-divider" />
     <li>Performance: <%=grades.performance_grade  %></li>
     <li>Feedback: "<%= grades.feedback  %>"</li>
-
+    <% if Time.zone.now < grades.grade_date %>
+      <li> Goes live in <%= distance_of_time_in_words(Time.zone.now, grades.grade_date) %>  </li>
+    <% else %>
+      <li> Published <%= time_ago_in_words(grades.grade_date) %> ago</li>
+    <% end %>
     <% if current_user.type == 'Teacher' %>
         <% if @student.last_sign_in_at >= grades.grade_date %>
           <li> read</li>

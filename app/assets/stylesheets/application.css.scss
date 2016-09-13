@@ -146,8 +146,8 @@ a:active {color: steelblue;}  /* selected link */
 .buttonscolour {
 
 
-a{color: white;}
-
+a {color: white;}
+paddin-top: 10px;
 }
 
 
@@ -425,13 +425,23 @@ Option selecting*
 {
     display: none;
 }
+#shortcut_wrapper span{display: none}
+#Geometry,
+#Number,
+#Measurement
+{
+    display: none;
+}
 
 
-
-/* Profile page */
-
+/* Searchbox */
 
 
+.searchboxteacher {
+  padding-top: 40px;
+  position:relative;
+  right: 147px;
+}
 
 
 

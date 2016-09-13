@@ -26,13 +26,12 @@
 
   <div class="field">
     <%= f.label :subcategory %>
-    <%= f.text_field :subcategory %>
+    <%= f.select :subcategory,  options_for_select(%w[Number Geometry Measurement]), :include_blank => true %>
   </div>
 
   <div class="field">
     <%= f.label :performance_grade %>
-    <%= f.text_field :performance_grade %>
-  </div>
+    <%= f.select :performance_grade, options_for_select(%w[Not-started Working-towards Working-at Greater-depth]), :include_blank => true %>
 
   <div class="field">
     <%= f.label :feedback %>

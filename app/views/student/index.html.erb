@@ -4,7 +4,7 @@
 
 <% if user_signed_in? %>
 <ul id="navbar">
-    <li class="active"><%=link_to('Home', root_path)%></li>
+    <li class="active"><%=link_to("#{current_user.first_name} #{current_user.last_name} (Student)", root_path)%></li>
     <li><%= link_to('Settings', edit_user_registration_path)  %></li>
     <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
 </ul>
@@ -15,75 +15,95 @@
 </ul>
 <% end %>
 
-<h1><%= current_user.first_name %> <%= current_user.last_name %> (Student) </h1>
 
 
-    <h5>Teacher:
-        <%= @teacher_other.first_name %> <%= @teacher_other.last_name %>
-    <h5>
 
-<!-- Tips for parents -->
 
-<div type = 'teacher_tips'>
+<div class = "row">
+    <div class = "col-md-6">
+        <% unless @all_tasks.blank? %>
+            <h3>Task</h3>
+        <% end %>
 
-<h3>Feedback tip</h3>
+        <% @all_tasks.each do |task| %>
+            <h4> <%= task.subject %> - <%= task.task %> </h4>
+            <h5> due in  <%= distance_of_time_in_words(Time.zone.now,task.due_date) %> </h5>
+        <% end %>
 
-<p> <%= @tip.body %> </p>
 
+    </div>
+
+    <div class = "col-md-6">
+
+        <h5>Teacher:
+            <%= @teacher_other.first_name %> <%= @teacher_other.last_name %>
+        <h5>
+
+        <div type = 'teacher_tips'>
+
+        <h3>Feedback tip</h3>
+
+        <p> <%= @tip.body %> </p>
+
+        </div>
+    </div>
 </div>
 
 
 
-<% unless @all_tasks.blank? %>
-    <h3>Task</h3>
-<% end %>
-
-<% @all_tasks.each do |task| %>
-<li>
-    <p><b> <%= task.task %> -  </b><%= task.subject %> - due: <%= task.due_date%> </p>
-</li>
-<% end %>
 
 
 
-<% unless @latest_two_english_grade.blank? %>
-<h3>Most recent English grades</h3>
-<% end %>
+<!-- The row with the grades -->
+<div class = "row">
 
-<% @latest_two_english_grade.each do |grades| %>
-  <div class="card">
-    <h1 class="card-header"><%= grades.title %> </h1>
-    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
-    <hr class="card-divider" />
-    <li>Performance: <%=grades.performance_grade  %></li>
-    <li>Feedback: "<%= grades.feedback  %>"</li>
 
+    <!-- English grades -->
+    <div class = "col-md-6">
+        <% unless @latest_two_english_grade.blank? %>
+            <h3>Most recent English grades</h3>
+            <% end %>
+
+            <% @latest_two_english_grade.each do |grades| %>
+              <div class="card">
+                <h1 class="card-header"><%= grades.title %> </h1>
+                <h2 class="card-subheader"><%=grades.subcategory%> </h2>
+                <hr class="card-divider" />
+                <li>Performance: <%=grades.performance_grade  %></li>
+                <li>Feedback: "<%= grades.feedback  %>"</li>
+                <li> Published <%= time_ago_in_words(grades.grade_date) %> ago</li>
+
+            </div>
+        <% end %>
+
+
+        <%= link_to('View all English Grades', english_grade_path(:id => current_user.id) )  %>
+
+    </div>
+
+
+    <!-- Maths grades -->
+    <div class = "col-md-6">
+    <% unless @latest_two_maths_grade.blank? %>
+        <h3>Most recent Maths grades</h3>
+        <% end %>
+        <% @latest_two_maths_grade.each do |grades| %>
+
+
+          <div class="card">
+            <h1 class="card-header"><%= grades.title %> </h1>
+            <h2 class="card-subheader"><%=grades.subcategory%></h2>
+            <hr class="card-divider" />
+            <li>Performance: <%=grades.performance_grade  %></li>
+            <li>Feedback: "<%= grades.feedback  %>"</li>
+            <li> Published <%= time_ago_in_words(grades.grade_date) %> ago</li>
+
+          </div>
+    <% end %>
+
+    <%= link_to('View all Maths Grades', maths_grade_path(:id => current_user.id) )  %>
+
+    </div>
 </div>
-<% end %>
-
-
-<%= link_to('View all English Grades', english_grade_path(:id => current_user.id) )  %>
-
-<!-- Maths grades -->
-
-
-<% unless @latest_two_maths_grade.blank? %>
-<h3>Most recent Maths grades</h3>
-<% end %>
-<% @latest_two_maths_grade.each do |grades| %>
-
-
-  <div class="card">
-    <h1 class="card-header"><%= grades.title %> </h1>
-    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
-    <hr class="card-divider" />
-    <li>Performance: <%=grades.performance_grade  %></li>
-    <li>Feedback: "<%= grades.feedback  %>"</li>
-
-  </div>
-<% end %>
-
-
-<%= link_to('View all Maths Grades', maths_grade_path(:id => current_user.id) )  %>
 
 

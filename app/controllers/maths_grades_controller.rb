@@ -32,36 +32,18 @@ end
   # GET /maths_grades/1
   # GET /maths_grades/1.json
   def show
-    if current_user.type == 'student'
-      @teacher_other = Teacher.where('email' => current_user.teacher_email).first
-    else
-      @teacher_other = current_user
-    end
 
 
 
      @student = Student.find_by_id(params[:id])
-    @all_maths_grades = MathsGrade.where(:student_id => @student.id).where('grade_date < ?', Time.zone.now).all.order('grade_date DESC')
 
+     if current_user.type == 'Student'
+      @all_maths_grades = MathsGrade.where(:student_id => @student.id).where('grade_date < ?', Time.zone.now).all.order('grade_date DESC')
+     else
+      @all_maths_grades = MathsGrade.where(:student_id => @student.id).all.order('grade_date DESC')
+     end
 
     #Maths
-        #Generated feedback - number
-        @generated_feedback_number_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Not-started'}).last
-        @generated_feedback_number_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Working-towards'}).last
-        @generated_feedback_number_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Working-at'}).last
-        @generated_feedback_number_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Greater-depth'}).last
-
-        #Generated feedback - measurement
-        @generated_feedback_measurement_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Not-started'}).last
-        @generated_feedback_measurement_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Working-towards'}).last
-        @generated_feedback_measurement_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Working-at'}).last
-        @generated_feedback_measurement_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Greater-depth'}).last
-
-        #Generated feedback - geometry
-        @generated_feedback_geometry_not_started = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Not-started'}).last
-        @generated_feedback_geometry_working_towards = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Working-towards'}).last
-        @generated_feedback_geometry_working_at = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Working-at'}).last
-        @generated_feedback_geometry_greater_depth = GeneratedFeedback.where({teacher_id: @teacher_other.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Greater-depth'}).last
 
 
   end
@@ -76,6 +58,26 @@ end
 
       @all_shortcut_texts = ShortcutText.where(:teacher_id => current_user.id).all
     @tip = Tip.where(:audience => 'teacher').order('RANDOM()').first
+
+
+ #Generated feedback - number
+        @generated_feedback_number_not_started = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Not-started'}).last
+        @generated_feedback_number_working_towards = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Working-towards'}).last
+        @generated_feedback_number_working_at = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Working-at'}).last
+        @generated_feedback_number_greater_depth = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Number', performance_grade: 'Greater-depth'}).last
+
+        #Generated feedback - measurement
+        @generated_feedback_measurement_not_started = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Not-started'}).last
+        @generated_feedback_measurement_working_towards = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Working-towards'}).last
+        @generated_feedback_measurement_working_at = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Working-at'}).last
+        @generated_feedback_measurement_greater_depth = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Measurement', performance_grade: 'Greater-depth'}).last
+
+        #Generated feedback - geometry
+        @generated_feedback_geometry_not_started = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Not-started'}).last
+        @generated_feedback_geometry_working_towards = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Working-towards'}).last
+        @generated_feedback_geometry_working_at = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Working-at'}).last
+        @generated_feedback_geometry_greater_depth = GeneratedFeedback.where({teacher_id: current_user.id, subject: 'Maths', subcategory: 'Geometry', performance_grade: 'Greater-depth'}).last
+
 
   end
 

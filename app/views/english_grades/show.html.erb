@@ -25,28 +25,50 @@
 <% if current_user.type == 'teacher' %>
   <%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
 <% end %>
-<% @all_english_grades.each do |grades| %>
-  <div class="card">
-            <div class="card-actions animate">
-      <% if Time.zone.now < grades.grade_date && current_user.type == 'Teacher' %> <%= link_to('Edit', edit_english_grade_path(grades)) %> |
-      <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% elsif current_user.type == 'Teacher' %>
-      Grade delivered
-      <% end %>
-    </div>
-    <h1 class="card-header"><%= grades.title %> </h1>
-    <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
-    <hr class="card-divider" />
-    <li>Performance: <%=grades.performance_grade  %></li>
-    <li>Feedback: "<%= grades.feedback  %>"</li>
-    <% if current_user.type == 'Teacher' %>
-        <% if @student.last_sign_in_at >= grades.grade_date %>
-          <li> read</li>
-          <% else %>
-          <li> unread </li>
+
+<% if current_user.type == 'Teacher' %>
+        <% @all_english_grades_teachers.each do |grades| %>
+          <div class="card">
+                    <div class="card-actions animate">
+              <% if Time.zone.now < grades.grade_date %> <%= link_to('Edit', edit_english_grade_path(grades)) %> |
+              <td><%= link_to 'Delete', grades, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% else %>
+              Grade delivered
+              <% end %>
+            </div>
+            <h1 class="card-header"><%= grades.title %> </h1>
+            <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
+            <hr class="card-divider" />
+            <li>Performance: <%=grades.performance_grade  %></li>
+            <li>Feedback: "<%= grades.feedback  %>"</li>
+            <% if Time.zone.now < grades.grade_date %>
+              <li> Goes live in <%= distance_of_time_in_words(Time.zone.now, grades.grade_date) %>  </li>
+            <% else %>
+              <li> Published <%= time_ago_in_words(grades.grade_date) %> ago</li>
+            <% end %>
+                <% if @student.last_sign_in_at >= grades.grade_date %>
+                  <li> read</li>
+                  <% else %>
+                  <li> unread </li>
+                <% end %>
+        </div>
         <% end %>
-    <% end %>
-</div>
+<% else %>
+        <% @all_english_grades_students.each do |grades| %>
+          <div class="card">
+                    <div class="card-actions animate"></div>
+            <h1 class="card-header"><%= grades.title %> </h1>
+            <h2 class="card-subheader"><%=grades.subcategory%> <%= grades.grade_date %> </h2>
+            <hr class="card-divider" />
+            <li>Performance: <%=grades.performance_grade  %></li>
+            <li>Feedback: "<%= grades.feedback  %>"</li>
+            <li> Published <%= time_ago_in_words(grades.grade_date) %> ago</li>
+        </div>
+        <% end %>
 <% end %>
+
+
+
+
 
 

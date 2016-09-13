@@ -16,64 +16,131 @@
 <% end %>
 
 
+
 <h1>New Maths Grade</h1>
 
-<% if @batch_process == 'true' %>
-          <% @all_students.each do |student| %>
-              <%= render '_form', @batch_of_grades %>
-            <% end %>
+<div class = "row">
+  <!-- form -->
+  <div class = "col-md-4">
+    <%= render 'form', maths_grade: @maths_grade %>
+  </div>
+<!-- shortcuts -->
+  <div class = "col-md-8">
 
-<% end %>
+  </div>
 
-
-
-
-
-
-
+</div>
 
 
 
 
 
 
+<h3> General shortcuts </h3>
+
+  <% (@all_shortcut_texts).each do |n| %>
+  <h5> </h5>
+   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.body %>" > <p> <%= n.body %></p> </button>
+  <% end %>
 
 
 
 
 
+<div id="wrapper">
+  <span id = "Number">
+<h3>Number shortcuts</h3>
+  <% unless @generated_feedback_number_not_started.blank? %>
+  <h5>Not started</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_number_not_started.auto_feedback %>" > <p> <%= @generated_feedback_number_not_started.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_number_working_towards.blank? %>
+    <h5>Working-towards</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_number_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_number_working_towards.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_number_working_at.blank? %>
+    <h5>Workng-at</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_number_working_at.auto_feedback %>" > <p> <%= @generated_feedback_number_working_at.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_number_greater_depth.blank? %>
+    <h5>Greater-depth</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_number_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_number_greater_depth.auto_feedback %></p> </button>
+  <% end %>
+
+  </span>
+
+
+<span id = "Measurement">
+  <h3>Measurement shortcuts</h3>
+  <% unless @generated_feedback_measurement_not_started.blank? %>
+  <h5>Not started</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_measurement_not_started.auto_feedback %>" > <p> <%= @generated_feedback_measurement_not_started.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_measurement_working_towards.blank? %>
+    <h5>Working-towards</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_measurement_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_measurement_working_towards.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_measurement_working_at.blank? %>
+    <h5>Workng-at</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_measurement_working_at.auto_feedback %>" > <p> <%= @generated_feedback_measurement_working_at.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_measurement_greater_depth.blank? %>
+    <h5>Greater-depth</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_measurement_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_measurement_greater_depth.auto_feedback %></p> </button>
+  <% end %>
+
+
+</span>
+<span id = "Geometry">
+  <h3>Geometry shortcuts</h3>
+  <% unless @generated_feedback_geometry_not_started.blank? %>
+  <h5>Not started</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_geometry_not_started.auto_feedback %>" > <p> <%= @generated_feedback_geometry_not_started.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_geometry_working_towards.blank? %>
+    <h5>Working-towards</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_geometry_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_geometry_working_towards.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_geometry_working_at.blank? %>
+    <h5>Workng-at</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_geometry_working_at.auto_feedback %>" > <p> <%= @generated_feedback_geometry_working_at.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_geometry_greater_depth.blank? %>
+    <h5>Greater-depth</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_geometry_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_geometry_greater_depth.auto_feedback %></p> </button>
+  <% end %>
+
+</span>
+
+</div>
 
 
 
 
 
+<div class = "row">
+<div class = "col-md-12">
+</div>
 
-
-
-
-
-<% if @batch_process != 'true' %>
-
-  <%= render 'form', maths_grade: @maths_grade %>
-
-
-
-<%= link_to 'Back', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id) %>
-
-
-<div type = 'teacher_tips'>
+</div>
 
 <h3>Feedback Tip</h3>
 
 <%= @tip.body %>
 
-</div>
+<br>
 
-<h3>Select shortcuts </h3>
+<%= link_to 'Back', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id) %>
 
-  <% (@all_shortcut_texts).each do |n| %>
-   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.body %>" > <p> <%= n.body %></p> </button>
-  <% end %>
 
 
 <script>
@@ -84,4 +151,18 @@
     $('.copy_to_clipboard').copyToClipBoard();
   });
  </script>
-<% end %>
+
+<script>
+$('#maths_grade_subcategory').change(function () {
+  $('#Number, #Measurement, #Geometry').css("display","none");
+  console.log($(this).val());
+  var fieldToShow = $(this).val();
+  $("#" + fieldToShow).css("display","inline-block");
+});
+$('#maths_grade_performance_grade').change(function () {
+  $('#Not-started, #Working-towards, #Working-at, #Greater-depth').css("display","none");
+  console.log($(this).val());
+  var fieldToShow = $(this).val();
+  $("#" + fieldToShow).css("display","inline-block");
+});
+</script>

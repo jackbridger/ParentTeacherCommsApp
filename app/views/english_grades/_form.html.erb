@@ -26,12 +26,12 @@
 
   <div class="field">
     <%= f.label :subcategory %>
-    <%= f.select :subcategory, options_for_select(%w[Spelling Reading Writing]) %>
+    <%= f.select :subcategory, options_for_select(%w[Spelling Reading Writing]), :include_blank => true %>
   </div>
 
   <div class="field">
     <%= f.label :performance_grade %>
-    <%= f.select :performance_grade, options_for_select(%w[Not-started Working-towards Working-at Greater-depth]) %>
+    <%= f.select :performance_grade, options_for_select(%w[Not-started Working-towards Working-at Greater-depth]), :include_blank => true %>
 
   </div>
 

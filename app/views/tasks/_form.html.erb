@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :subject %>
-    <%= f.text_field :subject %>
+    <%= f.select :subject, options_for_select(%w[English Maths]) %>
   </div>
 
   <div class="field">

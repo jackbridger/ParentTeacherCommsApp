@@ -15,10 +15,110 @@
 </ul>
 <% end %>
 
-
 <h1>New English Grade</h1>
 
-<%= render 'form', english_grade: @english_grade %>
+<div class = "row">
+  <!-- form -->
+  <div class = "col-md-4">
+    <%= render 'form', english_grade: @english_grade %>
+
+  </div>
+
+
+<!-- shortcut text -->
+  <div class = "col-md-8">
+
+<h3>General shortcuts </h3>
+
+  <% (@all_shortcut_texts).each do |n| %>
+   <h5> </h5>
+   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.body %>" > <p> <%= n.body %></p> </button>
+  <% end %>
+
+<div id="wrapper">
+  <span id = "Spelling">
+<h3> Spelling shortcuts </h3>
+  <% unless @generated_feedback_spelling_not_started.blank? %>
+  <h5>Not started</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_not_started.auto_feedback %>" > <p> <%= @generated_feedback_spelling_not_started.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_spelling_working_towards.blank? %>
+    <h5>Working-towards</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_spelling_working_towards.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_spelling_working_at.blank? %>
+    <h5>Workng-at</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_working_at.auto_feedback %>" > <p> <%= @generated_feedback_spelling_working_at.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_spelling_greater_depth.blank? %>
+    <h5>Greater-depth</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_spelling_greater_depth.auto_feedback %></p> </button>
+  <% end %>
+
+  </span>
+
+
+<span id = "Writing">
+  <h3>Writing shortcuts </h3>
+  <% unless @generated_feedback_writing_not_started.blank? %>
+  <h5>Not started</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_writing_not_started.auto_feedback %>" > <p> <%= @generated_feedback_writing_not_started.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_writing_working_towards.blank? %>
+    <h5>Working-towards</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_writing_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_writing_working_towards.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_writing_working_at.blank? %>
+    <h5>Workng-at</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_writing_working_at.auto_feedback %>" > <p> <%= @generated_feedback_writing_working_at.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_writing_greater_depth.blank? %>
+    <h5>Greater-depth</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_writing_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_writing_greater_depth.auto_feedback %></p> </button>
+  <% end %>
+
+
+</span>
+<span id = "Reading">
+  <h3>Reading shortcuts </h3>
+  <% unless @generated_feedback_reading_not_started.blank? %>
+  <h5>Not started</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_reading_not_started.auto_feedback %>" > <p> <%= @generated_feedback_reading_not_started.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_reading_working_towards.blank? %>
+    <h5>Working-towards</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_reading_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_reading_working_towards.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_reading_working_at.blank? %>
+    <h5>Workng-at</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_reading_working_at.auto_feedback %>" > <p> <%= @generated_feedback_reading_working_at.auto_feedback %></p> </button>
+  <% end %>
+
+    <% unless @generated_feedback_reading_greater_depth.blank? %>
+    <h5>Greater-depth</h5>
+      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_reading_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_reading_greater_depth.auto_feedback %></p> </button>
+  <% end %>
+
+</span>
+
+</div>
+
+
+
+  </div>
+
+</div>
+
+
+
 
 <%= link_to 'Back', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id) %>
 
@@ -32,44 +132,7 @@
 
 </div>
 
-<h3>Specified shortcuts </h3>
 
-<div id="wrapper">
-  <span id = "Spelling">
-
-  <% unless @generated_feedback_spelling_not_started.blank? %>
-  <b>Not started</b>
-      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_not_started.auto_feedback %>" > <p> <%= @generated_feedback_spelling_not_started.auto_feedback %></p> </button>
-  <% end %>
-
-    <% unless @generated_feedback_spelling_working_towards.blank? %>
-    <b>Working-towards</b>
-      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_working_towards.auto_feedback %>" > <p> <%= @generated_feedback_spelling_working_towards.auto_feedback %></p> </button>
-  <% end %>
-
-    <% unless @generated_feedback_spelling_working_at.blank? %>
-    <b>Workng-at</b>
-      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_working_at.auto_feedback %>" > <p> <%= @generated_feedback_spelling_working_at.auto_feedback %></p> </button>
-  <% end %>
-
-    <% unless @generated_feedback_spelling_greater_depth.blank? %>
-    <b>Greater-depth</b>
-      <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= @generated_feedback_spelling_greater_depth.auto_feedback %>" > <p> <%= @generated_feedback_spelling_greater_depth.auto_feedback %></p> </button>
-  <% end %>
-
-  </span>
-
-
-<span id = "Writing">Writing</span>
-<span id = "Reading">Reading </span>
-
-</div>
-
-<h3>Select shortcuts </h3>
-
-  <% (@all_shortcut_texts).each do |n| %>
-   <button class="btn btn-success copy_to_clipboard" data-clipboard-text= "<%= n.body %>" > <p> <%= n.body %></p> </button>
-  <% end %>
 
 <script>
 $('#english_grade_subcategory').change(function () {
