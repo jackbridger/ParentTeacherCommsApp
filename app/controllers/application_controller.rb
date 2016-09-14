@@ -19,4 +19,6 @@ class ApplicationController < ActionController::Base
     def stored_locations_for(resource)
     end
 
+    Time.zone = 'GB'
+
 end
