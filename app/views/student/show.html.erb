@@ -22,7 +22,7 @@
 
 <li> <%= @student.email %> </li>
 <li> Number of logins: <%= @student.sign_in_count %> </li>
-<li> Last logged in <%= time_ago_in_words(@student.last_sign_in_at) %> ago </li>
+<li> Last logged in <%= distance_of_time_in_words(Time.zone.now, @student.last_sign_in_at) %> ago </li>
 <br>
 
 
