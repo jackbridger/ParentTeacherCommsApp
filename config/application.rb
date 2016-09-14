@@ -15,6 +15,7 @@ module Sti
     # -- all .rb files in that directory are automatically loaded.
     config.assets.initialize_on_precompile = false
     config.time_zone = 'GB'
+    config.active_record.default_timezone = 'GB'
 
   end
 end
