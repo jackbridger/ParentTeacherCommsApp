@@ -2,7 +2,19 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
 
+<style>
+body {
+   background: url(https://photos-6.dropbox.com/t/2/AABO-zyEY2tOjMWLE104A8VUTNP-OKx3304nOyxkkd4SUA/12/232060938/jpeg/32x32/1/_/1/2/2015-09-Life-of-Pix-free-stock-photos-road-desert-bus-fresonneveld.jpg/EMGkycQBGNe4AiAHKAc/1FCxtUYuYCMA_UVWkGTRrrdc-EXOXR8d4yf0iBn_sZg?dl=0&size=2048x1536&size_mode=3);
+
+}
+
+
+
+</style>
 </head>
+
+
+
 
 <% if user_signed_in? %>
 <ul id="navbar">
@@ -17,17 +29,22 @@
 </ul>
 <% end %>
 
+<div class = "row">
+  <div class = "col-md-4">
+    <h2> <%= @student.first_name %> <%= @student.last_name %> </h2>
+  </div>
+  <div class = "col-md-4"> </div>
+  <div class = "col-md-4">
+    <div class = "student_details">
+      <h5> <%= @student.email %> </h5>
+      <h5> Number of logins: <%= @student.sign_in_count %> </h5>
+      <h5> Last logged in <%= distance_of_time_in_words(Time.zone.now, @student.last_sign_in_at.to_time) %> ago </h5>
+    </div>
+  </div>
 
-<h2> <%= @student.first_name %> <%= @student.last_name %> </h2>
-
-<li> <%= @student.email %> </li>
-<li> Number of logins: <%= @student.sign_in_count %> </li>
-<li> Last logged in <%= distance_of_time_in_words(Time.zone.now, @student.last_sign_in_at.to_time) %> ago </li>
-<br>
 
 
-
-
+</div>
 
 
 <div class = "row">
@@ -55,22 +72,23 @@
     <% if Time.zone.now < grades.grade_date %>
       <li> Goes live in <%= distance_of_time_in_words(Time.zone.now, grades.grade_date) %>  </li>
     <% else %>
-      <li> Published <%= distance_of_time_in_words(Time.zone.now, grades.grade_date) %> ago ... which is <%= grades.grade_date %> </li>
+      <li> Published <%= distance_of_time_in_words(Time.zone.now, grades.grade_date) %> ago  </li>
     <% end %>
     <% if @student.last_sign_in_at >= grades.grade_date %>
-    <li> read</li>
+    <div class = "read"><li> read</li></div>
     <% else %>
-    <li> unread </li>
+    <div class = "unread"><li> unread </li></div>
 <% end %>
 
 </div>
 <% end %>
 
 <% unless @latest_two_english_grade.blank? %>
-<%= link_to('View all English Grades', english_grade_path(:id => @student.id) )  %> 
-<% end %>
- | <%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
-
+  <div class = "viewall1">
+    <%= link_to('View all English Grades', english_grade_path(:id => @student.id) )  %> 
+    <% end %>
+     | <%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
+  </div>
 </div>
 <!-- Maths grades -->
 <div class = "col-md-6">
@@ -101,27 +119,32 @@
     <% end %>
 
     <% if @student.last_sign_in_at >= grades.grade_date %>
-    <li> read</li>
+    <div class = "read"><li> read</li></div>
     <% else %>
-    <li> unread </li>
+    <div class = "unread"><li> unread </li></div>
 <% end %>
 
   </div>
 <% end %>
 
 <% unless @latest_two_maths_grade.blank? %>
-<%= link_to('View all Maths Grades', maths_grade_path(:id => @student.id) )  %> 
-<% end %>
-|
-<%= link_to('Create Maths Grade', new_maths_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
-
+  <div class = "viewall1">
+    <%= link_to('View all Maths Grades', maths_grade_path(:id => @student.id) )  %> 
+    <% end %>
+    |
+    <%= link_to('Create Maths Grade', new_maths_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
+  </div>
 
 
 </div>
 </div>
 
 <br>
-<%= link_to "Back", teacher_index_path %>
+<div class = "back_button">
+      <div class = "buttonscolour">
+        <%= link_to "Back", root_path, :class => "btn btn-primary" %>
+      </div>
+</div>
 <br>
 
 

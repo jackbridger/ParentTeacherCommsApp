@@ -440,15 +440,67 @@ Option selecting*
 .searchboxteacher {
   padding-top: 40px;
   position:relative;
-  right: 147px;
+  right: 50px;
+
+}
+
+.read {
+  color: green;
 }
 
 
+.unread {
+  color: red;
+}
+
+.viewall {
+    width:155px;
+    height:25px;
+    background-color:white;
+    z-index:0;
+    opacity:0.7;
+    position:relative;
+    left: 15px;
+}
+
+.viewall1 {
+    width:315px;
+    height:25px;
+    background-color:white;
+    z-index:0;
+    opacity:0.6;
+    position:relative;
+
+}
+
+.auto_feedback_section {
+    width:1200px;
+    height:120px;
+    background-color:white;
+    z-index:0;
+    opacity:0.75;
+}
+
+.subject_back {
+      width:100px;
+    height:35px;
+    background-color:white;
+    z-index:0;
+    opacity:0.75;
+}
 
 
-
-
-
-
-
-
+.student_details {
+        width:300px;
+    height:70px;
+    background-color:white;
+    z-index:0;
+    opacity:0.75;
+}
+.back_button {
+        width:35px;
+    height:20px;
+    background-color:white;
+    z-index:0;
+    opacity:0.5;
+}

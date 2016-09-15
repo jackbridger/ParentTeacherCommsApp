@@ -1,5 +1,39 @@
 <head>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+<style>
+body {
+   background: url(https://photos-6.dropbox.com/t/2/AABO-zyEY2tOjMWLE104A8VUTNP-OKx3304nOyxkkd4SUA/12/232060938/jpeg/32x32/1/_/1/2/2015-09-Life-of-Pix-free-stock-photos-road-desert-bus-fresonneveld.jpg/EMGkycQBGNe4AiAHKAc/1FCxtUYuYCMA_UVWkGTRrrdc-EXOXR8d4yf0iBn_sZg?dl=0&size=2048x1536&size_mode=3);
+
+}
+h2 {
+    color: white;
+}
+li {color: steelblue;
+}
+.taskcard {
+    width:500px;
+    height:50px;
+    background-color:white;
+    z-index:0;
+    opacity:0.5;
+    position: relative;
+    right: -20px;
+}
+
+.teacher_tips1 {
+    width:660px;
+    height:100px;
+    background-color:white;
+    z-index:0;
+    opacity:0.5;
+    position:relative;
+    padding-top: -20px;
+    left: 10px;
+}
+
+</style>
+
 </head>
 
 <% if user_signed_in? %>
@@ -22,12 +56,14 @@
 <div class = "row">
     <div class = "col-md-6">
         <% unless @all_tasks.blank? %>
-            <h3>Task</h3>
+            <h2>Task</h2>
         <% end %>
 
         <% @all_tasks.each do |task| %>
-            <h4> <%= task.subject %> - <%= task.task %> </h4>
-            <h5> due in  <%= distance_of_time_in_words(Time.zone.now,task.due_date) %> </h5>
+            <div class = "taskcard">
+                <h4> <%= task.subject %> - <%= task.task %> </h4>
+                <h5> due in  <%= distance_of_time_in_words(Time.zone.now,task.due_date) %> </h5>
+            </div>
         <% end %>
 
 
@@ -39,12 +75,14 @@
             <%= @teacher_other.first_name %> <%= @teacher_other.last_name %>
         <h5>
 
-        <div type = 'teacher_tips'>
+        <div class = "teacher_tips1">
+            <div type = 'teacher_tips'>
 
-        <h3>Feedback tip</h3>
+            <h3>Feedback tip</h3>
 
-        <p> <%= @tip.body %> </p>
+            <p> <%= @tip.body %> </p>
 
+            </div>
         </div>
     </div>
 </div>
@@ -61,7 +99,7 @@
     <!-- English grades -->
     <div class = "col-md-6">
         <% unless @latest_two_english_grade.blank? %>
-            <h3>Most recent English grades</h3>
+            <h2>Most recent English grades</h2>
             <% end %>
 
             <% @latest_two_english_grade.each do |grades| %>
@@ -76,16 +114,16 @@
             </div>
         <% end %>
 
-
-        <%= link_to('View all English Grades', english_grade_path(:id => current_user.id) )  %>
-
+        <div class = "viewall">
+            <%= link_to('View all English Grades', english_grade_path(:id => current_user.id) )  %>
+        </div>
     </div>
 
 
     <!-- Maths grades -->
     <div class = "col-md-6">
     <% unless @latest_two_maths_grade.blank? %>
-        <h3>Most recent Maths grades</h3>
+        <h2>Most recent Maths grades</h2>
         <% end %>
         <% @latest_two_maths_grade.each do |grades| %>
 
@@ -100,9 +138,9 @@
 
           </div>
     <% end %>
-
+<div class = "viewall">
     <%= link_to('View all Maths Grades', maths_grade_path(:id => current_user.id) )  %>
-
+</div>
     </div>
 </div>
 

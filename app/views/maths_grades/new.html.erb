@@ -139,8 +139,9 @@
 
 <br>
 
-<%= link_to 'Back', choose_subjects_path(:student_id => @student.id, :teacher_id => current_user.id) %>
-
+      <div class = "buttonscolour">
+        <%= link_to "Back", root_path, :class => "btn btn-primary" %>
+      </div>
 
 
 <script>

@@ -14,8 +14,10 @@
     <li><%= link_to('Login', new_user_session_path)  %></li>
 </ul>
 <% end %>
-<h1>New Generated Feedback</h1>
+<h1>New shortcut text</h1>
 
 <%= render 'form', generated_feedback: @generated_feedback %>
 
-<%= link_to 'Back', edit_auto_gens_path %>
+      <div class = "buttonscolour">
+        <%= link_to "Back", edit_auto_gens_path, :class => "btn btn-primary" %>
+      </div>

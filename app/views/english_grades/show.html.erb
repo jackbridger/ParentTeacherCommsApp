@@ -4,6 +4,11 @@
   body {
     padding-top: -50px;
   }
+
+  body {
+   background: url(https://photos-6.dropbox.com/t/2/AABO-zyEY2tOjMWLE104A8VUTNP-OKx3304nOyxkkd4SUA/12/232060938/jpeg/32x32/1/_/1/2/2015-09-Life-of-Pix-free-stock-photos-road-desert-bus-fresonneveld.jpg/EMGkycQBGNe4AiAHKAc/1FCxtUYuYCMA_UVWkGTRrrdc-EXOXR8d4yf0iBn_sZg?dl=0&size=2048x1536&size_mode=3);
+
+}
 </style>
 
 </head>
@@ -21,7 +26,10 @@
 </ul>
 <% end %>
 <h1>All English grades </h2>
-<%= link_to 'Back', root_path %>
+      <div class = "buttonscolour">
+        <%= link_to "Back", root_path, :class => "btn btn-primary" %>
+      </div>
+
 <% if current_user.type == 'teacher' %>
   <%= link_to('Create English Grade', new_english_grade_path(:student_id => @student.id, :teacher_id => current_user.id))  %>
 <% end %>
@@ -47,9 +55,9 @@
               <li> Published <%= time_ago_in_words(grades.grade_date) %> ago</li>
             <% end %>
                 <% if @student.last_sign_in_at >= grades.grade_date %>
-                  <li> read</li>
+                  <div class = "read"><li> read</li></div>
                   <% else %>
-                  <li> unread </li>
+                  <div class = "unread"><li> unread </li></div>
                 <% end %>
         </div>
         <% end %>

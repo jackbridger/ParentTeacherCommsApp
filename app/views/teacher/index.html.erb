@@ -29,6 +29,15 @@ h2 {
 #shortcuts{
   margin: 4px;
 }
+
+#parentgraph {
+  right: -54px;
+  position: relative;
+}
+
+#tasksbutton {
+  margin: 15px;
+}
 </style>
 
 
@@ -59,12 +68,59 @@ h2 {
 
 <div class = "col-md-4">
  <div class = "row">
-    <div id = "tasktitle">
-     <h2>Tasks</h2>
-          <div class = "buttonscolour">
-            <%= link_to "New", new_task_path(:teacher_id => @teacher.id), :class => "btn btn-primary" %>
+
+        <div class = "container1">
+            <div class = "searchboxteacher">
+                <div class="container" data-behaviour="search-on-list">
+                    <input type="text" class="input-query" data-search-on-list="search" placeholder="Find student"/>
+
+                    <div class="list-wrap">
+                      <ul class="list" data-search-on-list="list">
+                        <% @all_students.each do |student| %>
+                          <li class="list-item" data-search-on-list="list-item">
+                            <a href="../student/<%= student.id%>" class="list-item-link">
+                                <%= student.first_name %> <span class="item-list-subtext"><%= student.last_name %></span>
+                            </a>
+                          </li>
+                       <% end %>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+
+      </div>
+
+
+<div class = "row" id = "parentgraph">
+        <h2>Parental login statistics </h2>
+      <%= students_by_logins %>
+</div>
+
+
+
     </div>
-          </div>
+
+<!-- Right Hand Side - Second row -->
+
+
+</div>
+
+  <!--Middle section - empty -->
+<div class = "col-md-2">
+</div>
+
+<!-- Right hand side -->
+<div class = "col-md-5">
+       <!-- Right Hand Side - Second row -->
+
+  <!-- top right -->
+  <div class ="row">
+    <div id = "tasksbutton">
+     <h2>Tasks</h2>
+            <div class = "buttonscolour">
+              <%= link_to "New", new_task_path(:teacher_id => @teacher.id), :class => "btn btn-primary" %>
+            </div>
+    </div>
       <% @all_tasks.each do |task| %>
         <div class="card">
           <div class="card-actions animate">
@@ -73,14 +129,12 @@ h2 {
           </div>
           <h1 class="card-header"><%= task.due_date %> </h1>
           <h2 class="card-subheader"><%=task.subject%>  </h2>
-        <hr class="card-divider" />
-        <h3> <%= task.task %> </h3>
+          <hr class="card-divider" />
+          <h3> <%= task.task %> </h3>
       </div>
     <% end %>
+  </div>
 
-    </div>
-
-<!-- Right Hand Side - Second row -->
     <div class = "row" id = "shortcuts">
       <h2>Shortcut text</h2>
       <div class = "buttonscolour">
@@ -101,46 +155,9 @@ h2 {
 
     </div>
 
+
 </div>
 
-  <!--Middle section - empty -->
-<div class = "col-md-2">
-</div>
-
-<!-- Right hand side -->
-<div class = "col-md-5">
-       <!-- Right Hand Side - Second row -->
-
-  <!-- top left -->
-  <div class ="row">
-      <div class = "container1">
-            <div class = "searchboxteacher">
-      <div class="container" data-behaviour="search-on-list">
-          <input type="text" class="input-query" data-search-on-list="search" placeholder="Find student"/>
-
-          <div class="list-wrap">
-            <ul class="list" data-search-on-list="list">
-              <% @all_students.each do |student| %>
-                <li class="list-item" data-search-on-list="list-item">
-                  <a href="../student/<%= student.id%>" class="list-item-link">
-                      <%= student.first_name %> <span class="item-list-subtext"><%= student.last_name %></span>
-                  </a>
-                </li>
-             <% end %>
-            </ul>
-          </div>
-      </div>
-    </div>
-
-    </div>
-  </div>
-
-  <div class = "row"> </div>
-  <!-- second left -->
-  <div class ="row">
-
-        <h2>Parental login statistics </h2>
-      <%= students_by_logins %>
 
 
   </div>
